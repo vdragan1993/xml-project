@@ -37,6 +37,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'api.apps.ApiConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE_CLASSES = [
@@ -119,3 +121,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# MarkLogic Database connection parameters
+DATABASE_URL = '147.91.177.194:8000'
+DATABASE_USER = 'tim20'
+DATABASE_PASS = 'tim20'
+DATABASE_DB = 'Tim20'
+DATABASE_AUTHENTICATION = 'digest'
