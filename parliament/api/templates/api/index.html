@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Skupština grada Novog Sada</title>
+    <base href="/"/>
+    <!-- Angular Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
+    <!-- Angular Scripts -->
+    <script type="application/javascript" src="{% static 'api/js/app.js' %}"></script>
+    <script type="application/javascript" src="{% static 'api/js/controllers.js' %}"></script>
+    <script type="application/javascript" src=""></script>
+    <!-- Angular Controllers -->
+    <script type="text/javascript" src="{% static 'api/js/controllers/LoginCtrl.js' %}"></script>
+    <!-- Angular Services -->
+    <script type="text/javascript" src=""></script>
+
+</head>
+<body ng-app="parliamentApp">
+    <ng-view></ng-view>
+</body>
+</html>
