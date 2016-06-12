@@ -57,8 +57,18 @@ blockquote:after, q:after{content:' „'; font-size:26px; line-height:0}
 
 #topbar{padding:15px 0; font-size:.75em}
 #topbar nav{float:right}
-#topbar nav ul li{display:inline; margin:0 15px 0 0; padding:0 18px 0 0; border-right:1px solid #878787}
+#topbar nav ul li{display:inline-block; margin:0 15px 0 0; padding:0 18px 0 0; border-right:1px solid #878787}
 #topbar nav ul li:last-child{margin-right:0; padding-right:0; border:none}
+#topbar nav ul li a{
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    font-size: 16px;
+    color: #878787;
+}
+#topbar nav ul li a:hover{
+    color: #000;
+}
 
 #header{padding:30px 0 0 0}
 #header #hgroup{display:block; float:left; margin-bottom:30px}

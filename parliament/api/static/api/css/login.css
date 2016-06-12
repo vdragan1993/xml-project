@@ -4,6 +4,7 @@
   width: 360px;
   padding: 8% 0 0;
   margin: auto;
+
 }
 .form {
   position: relative;
@@ -89,8 +90,9 @@
   color: #EF3B3A;
 }
 body {
-  background: #66CDAA; /* fallback for old browsers */
-
+  background: url('../images/skupstina.jpg');
+  background-repeat: no-repeat;
+  background-size: 100%;
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
