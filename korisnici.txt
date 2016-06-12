@@ -1,0 +1,20 @@
+predsednik skupstine
+dragan
+admin123
+is superuser  1
+is istaff     1
+
+
+odbornik
+marko
+marko 123
+is superuser  0
+is staff      1
+
+
+gradjanin
+marina
+marina123
+is superuser  0
+is staff      0
+
