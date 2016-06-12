@@ -5,6 +5,18 @@
     <meta charset="UTF-8">
     <title>Skupština grada Novog Sada</title>
     <base href="/"/>
+    <!-- Styles -->
+    <link rel="icon" href="{% static 'api/images/favico3.png' %}">
+
+    <link rel="stylesheet" href="{% static 'api/css/animate.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/et-line-font.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/font-awesome.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/nivo-lightbox.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/style.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/layout.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/login.css' %}" type="text/css">
+
     <!-- Angular Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.js"></script>
@@ -17,9 +29,32 @@
     <script type="text/javascript" src="{% static 'api/js/controllers/LoginCtrl.js' %}"></script>
     <!-- Angular Services -->
     <script type="text/javascript" src=""></script>
-
+    <!-- Other scripts -->
+    <script type="application/javascript" src="{% static 'api/js/login.js' %}"></script>
 </head>
 <body ng-app="parliamentApp">
+
+<!-- Navigation bar -->
+<div class="wrapper row1">
+  <div id="topbar" class="clear">
+    <nav>
+      <ul><li><a href="http://www.free-css.com/" title="Home" >Home</a></li><li><a href="/submit-a-template" title="Submit a Free CSS Template" >Submit a Template</a></li><li><a href="/contact-us" title="Contact Us" >Contact Us</a></li><li><a href="/search" title="Search" >Search</a></li><li><a href="/advertise" title="Advertise" >Advertise</a></li></ul>
+    </nav>
+  </div>
+</div>
+
+
+
     <ng-view></ng-view>
+
+
+
+<!-- Footer -->
+<div class="wrapper row5">
+  <footer id="copyright" class="clear">
+    <p class="text-center">Copyright &copy; 2016. Pineapple team</p>
+  </footer>
+</div>
+
 </body>
 </html>
