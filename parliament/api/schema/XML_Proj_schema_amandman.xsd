@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+    attributeFormDefault="unqualified" targetNamespace="https://ftn.uns.ac.rs/xml"
+    xmlns:projAm="https://ftn.uns.ac.rs/xml" xmlns:proj="http://ftn.uns.ac.rs/xml">
+    <xs:import schemaLocation="XML_Proj_schema_act.xsd" namespace="http://ftn.uns.ac.rs/xml"/>
+    <xs:element name="amandman">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element type="xs:string" name="opis" minOccurs="1" maxOccurs="1"> </xs:element>
+                <xs:element minOccurs="1" maxOccurs="1" ref="proj:clan"/>
+            </xs:sequence>
+            <xs:attribute name="datum" type="xs:date" use="required"/>
+            <xs:attribute name="uri" type="xs:string" use="required"/>
+            <xs:attribute name="clanId" type="xs:string" use="required"/>
+            <xs:attribute name="operacija" type="xs:string" use="required"/>
+            <xs:attribute name="predlagac" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

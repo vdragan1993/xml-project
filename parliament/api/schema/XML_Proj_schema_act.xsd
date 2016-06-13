@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="unqualified"
+    targetNamespace="http://ftn.uns.ac.rs/xml" xmlns:proj="http://ftn.uns.ac.rs/xml">
+
+    <xs:element name="akt">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="1" minOccurs="1" name="preambula" type="proj:sadrzaj"/>
+                <xs:choice maxOccurs="1" minOccurs="1">
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="2" ref="proj:deo"/>
+                    </xs:sequence>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="2" ref="proj:glava"/>
+                    </xs:sequence>
+                    <xs:sequence>
+                        <xs:element maxOccurs="unbounded" minOccurs="2" ref="proj:clan"/>
+                    </xs:sequence>
+                </xs:choice>
+            </xs:sequence>
+            <xs:attribute name="naslov" type="xs:string" use="required"/>
+            <xs:attribute name="drzava" type="xs:string" use="required"/>
+            <xs:attribute name="opstina" type="xs:string" use="required"/>
+            <xs:attribute name="grad" type="xs:string" use="required"/>
+            <xs:attribute name="ustanova_organ" type="xs:string" use="required"/>
+            <xs:attribute name="datum_kreiranja" type="xs:date" use="required"/>
+            <xs:attribute name="datum_usvajanja" type="xs:date" use="optional"/>
+            <xs:attribute name="predlagac" type="xs:string" use="required"/>
+            <xs:attribute name="status" type="xs:string" use="required"/>
+            <xs:attribute name="kategorija" type="xs:string" use="required"/>
+            <xs:attribute name="za" type="xs:int" use="optional"/>
+            <xs:attribute name="protiv" type="xs:int" use="optional"/>
+            <xs:attribute name="uzdrzani" type="xs:int" use="optional"/>
+            <xs:attribute name="br_sluzbenog_glasnika" type="xs:string" use="optional"/>
+            <xs:attribute name="datum_pocetka_vazenja" type="xs:date" use="optional"/>
+            <xs:attribute name="datum_prestanka_vazenja" type="xs:date" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="deo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="2" ref="proj:glava"/>
+            </xs:sequence>
+            <xs:attribute name="naslov" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="glava">
+        <xs:complexType>
+            <xs:choice>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="proj:clan"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="proj:odeljak"/>
+                </xs:sequence>
+            </xs:choice>
+            <xs:attribute name="naslov" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="clan">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="proj:stav"/>
+            </xs:sequence>
+            <xs:attribute name="rbr" type="xs:string"/>
+            <xs:attribute name="naslov" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="odeljak">
+        <xs:complexType>
+            <xs:choice>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="proj:pododeljak"/>
+                </xs:sequence>
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="1" ref="proj:clan"/>
+                </xs:sequence>
+            </xs:choice>
+            <xs:attribute name="naslov" type="xs:string" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="stav">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:choice maxOccurs="unbounded" minOccurs="1">
+                    <xs:element maxOccurs="unbounded" minOccurs="2" ref="proj:tacka"/>
+                    <xs:element name="tekst" type="proj:sadrzaj"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="pododeljak">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="1" ref="proj:clan"/>
+            </xs:sequence>
+            <xs:attribute name="naslov" type="xs:string"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="tacka">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:choice maxOccurs="unbounded" minOccurs="1">
+                    <xs:element maxOccurs="unbounded" minOccurs="2" ref="proj:podtacka"/>
+                    <xs:element name="tekst" type="proj:sadrzaj"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="podtacka">
+        <xs:complexType mixed="true">
+            <xs:sequence>
+                <xs:choice maxOccurs="unbounded" minOccurs="1">
+                    <xs:element maxOccurs="unbounded" minOccurs="2" ref="proj:alineja"/>
+                    <xs:element name="tekst" type="proj:sadrzaj"/>
+                </xs:choice>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="alineja" type="proj:sadrzaj"/>
+    <xs:complexType mixed="true" name="sadrzaj">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="blok">
+                <xs:complexType>
+                    <xs:simpleContent>
+                        <xs:extension base="xs:string">
+                            <xs:attribute name="uri" type="xs:string"/>
+                        </xs:extension>
+                    </xs:simpleContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>
