@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projAm:amandman xmlns:proj="http://ftn.uns.ac.rs/xml"
+    xmlns:projAm="https://ftn.uns.ac.rs/xml"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="https://ftn.uns.ac.rs/xml file:/C:/Users/MarkoIvetic/Desktop/xml/XML_Proj_schema_amandman.xsd" 
+    datum="2006-05-04" uri="file:/C:/Users/MarkoIvetic/Desktop/xml/Odluka.xml" clanId="2" 
+    operacija="Izmena" predlagac="Pera Peric">
+    <projAm:opis>Izmena za odluku</projAm:opis>
+    <proj:clan rbr="2" naslov="">
+        <proj:stav>
+            <tekst>
+                <blok>U zavisnosti od komunalne opremljenosti, opremljenosti javnim objektima i
+                    saobraćajne povezanosti sa centralnim delovima jedinice lokalne samouprave, odnosno
+                    radnim zonama i drugim sadržajima u naselju, određuje se pet zona na teritoriji Grada
+                    Novog Sada.</blok>
+            </tekst>
+        </proj:stav>
+    </proj:clan>
+</projAm:amandman>

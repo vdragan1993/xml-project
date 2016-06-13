@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proj:akt xmlns:proj="http://ftn.uns.ac.rs/xml"
+ xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://ftn.uns.ac.rs/xml file:/C:/Users/MarkoIvetic/Desktop/xml/XML_Proj_schema_act.xsd" 
+ naslov="POSLOVNIK SKUPŠTINE GRADA NOVOG SADA" drzava="Srbija" 
+ opstina="Novi Sad" grad="Novi Sad" ustanova_organ="Skupština grada Novog Sada" datum_kreiranja="2006-05-04"
+     datum_usvajanja="2006-05-04" predlagac="Petar Petrovic" status="usvojen" kategorija="Poslovnik" za="50"
+     protiv="10" uzdrzani="5" br_sluzbenog_glasnika="12/2010" datum_pocetka_vazenja="2006-05-04"
+     datum_prestanka_vazenja="2006-05-04">
+    <preambula>
+        <blok>Na osnovu člana 24. tačka 1. Statuta Grada Novog Sada - prečišćen tekst 
+            (“Službeni list Grada Novog Sada”, broj 43/2008), Skupština Grada Novog Sada na XXIV sednici 
+            26. marta 2010. godine, donela je</blok>
+    </preambula>
+    <proj:glava naslov="Opšte odredbe">
+      
+            <proj:clan rbr="Član 1" naslov="">
+                <proj:stav>
+                    <tekst>
+                        <blok>Ovim poslovnikom uređuju se organizacija i rad Skupštine Grada Novog Sada 
+                            (u daljem tekstu: Skupš-tina) i ostvarivanje prava i dužnosti odbornika, kao i 
+                            druga pitanja od značaja za rad Skupštine.
+                            
+                            Ako neko pitanje u vezi sa organizacijom i radom Skupštine nije uređeno ovim poslovnikom, 
+                            Skupština to pitanje uređuje posebnim aktom.</blok>
+                    </tekst>
+                </proj:stav>
+            </proj:clan>
+            <proj:clan rbr="Član 2" naslov="">
+                <proj:stav>
+                    <tekst>
+                        <blok>Sve imenice koje se u ovom poslovniku koriste u muškom rodu, istovremeno obuhvataju i imenice u žen-skom rodu.
+                            
+                            Imenice koje označavaju službene pozicije, polo-žaje i funkcije u Gradu, koriste se u obliku koji izra-žava pol lica koje je njihov nosilac.</blok>
+                    </tekst>
+                </proj:stav>
+            </proj:clan>
+        
+    </proj:glava>
+    <proj:glava naslov="Konstitutivna sednica skupštine">
+        
+            <proj:clan rbr="Član 4" naslov="Sazivanje konstitutavine sednice">
+                <proj:stav>
+                    <tekst>
+                        <blok>Konstitutivnu sednicu Skupštine saziva predsed-nik Skupštine iz prethodnog saziva, u roku od 15 dana od dana objavljivanja rezultata izbora.</blok>
+                        <blok>Do izbora predsednika Skupštine, konstitutivnu sednicu Skupštine otvara i njome predsedava najsta-riji prisutan odbornik (predsedavajući) koji je ovla-šćen i da sazove konstitutivnu sednicu ako to u zakons-kom roku ne učini predsednik Skupštine iz prethodnog saziva.</blok>
+                    </tekst>
+                </proj:stav>
+            </proj:clan>
+            <proj:clan rbr="Član 7" naslov="Potvrđivanje madata">
+                <proj:stav>
+                    <tekst>
+                        <blok>Odbornici stiču prava i dužnosti odbornika Skup-štine danom potvrđivanja mandata.</blok>
+                        <blok>Potvrđivanje mandata odbornika vrši se na osnovu uverenja o izboru odbornika i izveštaja Verifikaci-onog odbora (u daljem tekstu: Odbor). Danom potvrđi-vanja mandata većine odbornika prestaje mandat od-bornika prethodnog saziva Skupštine.</blok>
+                    </tekst>
+                </proj:stav>
+            </proj:clan>
+        
+    </proj:glava>
+</proj:akt>
