@@ -27,6 +27,7 @@
     <script type="application/javascript" src=""></script>
     <!-- Angular Controllers -->
     <script type="text/javascript" src="{% static 'api/js/controllers/LoginCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/HomeCtrl.js' %}"></script>
     <!-- Angular Services -->
     <script type="text/javascript" src=""></script>
     <!-- Other scripts -->
@@ -35,7 +36,7 @@
 <body ng-app="parliamentApp">
 
 <!-- Navigation bar -->
-<div class="wrapper row5">
+<div ng-if="user" class="wrapper row5">
   <div id="topbar" class="clear">
     <nav>
       <ul>

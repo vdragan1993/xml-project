@@ -2,10 +2,10 @@
   <div class="form">
       <h1>Dobrodošli na naš sajt. Molimo ulogujte se.</h1>
       [[message]]
-    <form class="login-form">
-      <input type="text" placeholder="Korisničko ime"/>
-      <input type="password" placeholder="Lozinka"/>
-      <button>Uloguj se</button>
+    <form class="login-form" ng-submit="login()">
+      <input type="text" placeholder="Korisničko ime" ng-model = 'user.username'/>
+      <input type="password" placeholder="Lozinka" ng-model = 'user.password'/>
+      <input type="submit" value="Uloguj se">
     </form>
   </div>
 </div>

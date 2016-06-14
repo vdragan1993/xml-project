@@ -16,7 +16,11 @@
             .when('/', {
                 templateUrl: '/static/api/pages/login.html',
                 controller: 'LoginCtrl'
-        })
+            })
+            .when('/home',{
+                templateUrl: '/static/api/pages/home.html',
+                controller: 'HomeCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });
