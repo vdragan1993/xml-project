@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <projAm:amandman xmlns:proj="http://ftn.uns.ac.rs/xml"
  xmlns:projAm="https://ftn.uns.ac.rs/xml"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -17,4 +17,5 @@
             </tekst>
         </proj:stav>
     </proj:clan>
+    <projAm:obrazlozenje>Bla bla</projAm:obrazlozenje>
 </projAm:amandman>
