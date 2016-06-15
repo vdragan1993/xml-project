@@ -58,8 +58,8 @@ def remove_existing_file(path):
 
 xsl_amendment_html = 'transformations/amendment.xsl'
 xsl_amendment_pdf = 'transformations/amendment_pdf.xsl'
-xsl_act_html = 'transformations/'
-xsl_act_pdf = 'transformations/'
+xsl_act_html = 'transformations/Akt.xsl'
+xsl_act_pdf = 'transformations/Akt_pdf.xsl'
 
 
 def transform_document_to_html(xml_file_path, doc_type='amendment'):
@@ -103,7 +103,7 @@ def convert_xhtml_to_pdf(xhtml_string, destination_file, document_type='amendmen
     result_file = open(destination_file, "w+b")
     css = css_amendment
     if document_type == 'act':
-        css = css_act
+        css = None
 
     pisa_status = pisa.CreatePDF(xhtml_string, dest=result_file, default_css=css)
     result_file.close()
