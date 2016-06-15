@@ -118,3 +118,63 @@ def delete_document_from_uri(doc_uri):
     else:
         print("Error during deleting {0} from database!".format(doc_uri))
         return
+
+
+def update_document_from_file_uri(file_path, doc_uri):
+    """
+    Updates file on give uri with file from given path
+    :param file_path: path to xml file
+    :param doc_uri: document uri
+    """
+    f = open(file_path, "rb")
+    data = f.read()
+    f.close()
+    update_document(data, doc_uri)
+
+
+def update_document_from_string_uri(string, doc_uri):
+    """
+    Updates file on give uri with given string
+    :param string: xml file string
+    :param doc_uri: document uri
+    """
+    update_document(string, doc_uri)
+
+
+def update_document_from_file(file_path, update_name, collection):
+    """
+    Updates file with given update name in given collection with file from given path
+    :param file_path: path to xml file
+    :param update_name: update file name
+    :param collection: collection name
+    """
+    doc_uri = collection + "/" + update_name
+    update_document_from_file_uri(file_path, doc_uri)
+
+
+def update_document_from_string(string, update_name, collection):
+    """
+    Updates file with given update name in given collection with given string
+    :param string:
+    :param update_name:
+    :param collection:
+    :return:
+    """
+    doc_uri = collection + "/" + update_name
+    update_document_from_string_uri(string, doc_uri)
+
+
+def update_document(data, doc_uri):
+    """
+    MarkLogic REST update xml document
+    :param data: xml data
+    :param doc_uri: document uri
+    """
+    url = db.DATABASE_URL + "documents?uri=/" + doc_uri + "&database=Tim20"
+    headers = {'Content-Type': 'text/xml', 'charset': 'utf-8'}
+    response = requests.put(url, data=data, headers=headers, auth=HTTPDigestAuth(db.DATABASE_USER, db.DATABASE_PASS))
+    if 200 <= response.status_code < 300:
+        print("File {0} successfully updated!".format(doc_uri))
+        return
+    else:
+        print("Error during updating {0}!".format(doc_uri))
