@@ -27,7 +27,11 @@
     <script type="application/javascript" src=""></script>
     <!-- Angular Controllers -->
     <script type="text/javascript" src="{% static 'api/js/controllers/LoginCtrl.js' %}"></script>
+     <script type="text/javascript" src="{% static 'api/js/controllers/LogoutCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/HomeCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/HomePresidentCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/HomeAldermanCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/HomeCitizenCtrl.js' %}"></script>
     <!-- Angular Services -->
     <script type="text/javascript" src=""></script>
     <!-- Other scripts -->
@@ -43,14 +47,14 @@
           <li><a href="" title="Akti" >Akti</a></li>
           <li><a href="" title="Amandmani" >Amandmani</a></li>
           <li><a href="" title="Sjednica" >Sjednica</a></li>
-          <li><a href="" title="Odjavi se" >Odjavi se</a></li>
+            <li ng-controller="LogoutCtrl"><a href="" title="Odjavi se" ng-click="logout()" >Odjavi se</a></li>
       </ul>
     </nav>
   </div>
 </div>
 
 
-
+<!-- View -->
 <ng-view></ng-view>
 
 

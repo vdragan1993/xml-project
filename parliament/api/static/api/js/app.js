@@ -17,9 +17,17 @@
                 templateUrl: '/static/api/pages/login.html',
                 controller: 'LoginCtrl'
             })
-            .when('/home',{
-                templateUrl: '/static/api/pages/home.html',
-                controller: 'HomeCtrl'
+            .when('/citizen',{
+                templateUrl: '/static/api/pages/home_citizen.html',
+                controller: 'HomeCitizenCtrl'
+            })
+            .when('/president',{
+                templateUrl: '/static/api/pages/home_president.html',
+                controller: 'HomePresidentCtrl'
+            })
+            .when('/alderman',{
+                templateUrl: '/static/api/pages/home_alderman.html',
+                controller: 'HomeAldermanCtrl'
             })
             .otherwise({
                 redirectTo: '/'

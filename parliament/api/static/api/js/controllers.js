@@ -3,6 +3,9 @@
 
     angular.module('parliamentApp.controllers',[
         'parliamentApp.LoginCtrl',
-        'parliamentApp.HomeCtrl'
+        'parliamentApp.HomeCitizenCtrl',
+        'parliamentApp.HomePresidentCtrl',
+        'parliamentApp.HomeAldermanCtrl',
+        'parliamentApp.LogoutCtrl',
     ]);
 }(angular));
