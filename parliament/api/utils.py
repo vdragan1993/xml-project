@@ -133,3 +133,31 @@ def transform_document_to_pdf(xml_file_path, doc_type='amendment'):
     result = etree.tostring(new_dom, pretty_print=True)
     convert_xhtml_to_pdf(result, destination_path, document_type=doc_type)
     return destination_path
+
+
+def exists_in_content(doc_uri):
+    """
+    Check if document already exists in database
+    :param doc_uri: document name and collection
+    :return: True or False
+    """
+    f = open("data/content.txt", "r")
+    lines = f.readlines()
+    f.close()
+    for line in lines:
+        line = line[:-1]
+        if line == doc_uri:
+            return True
+    return False
+
+
+def write_to_content(doc_uri):
+    """
+    Add document uri in list of existing documents in database
+    :param doc_uri: document name and collection
+    """
+    f = open("data/content.txt", "a")
+    line = doc_uri + "\n"
+    f.write(line)
+    f.close()
+

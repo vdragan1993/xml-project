@@ -123,7 +123,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 # MarkLogic Database connection parameters
-DATABASE_URL = '147.91.177.194:8000'
+DATABASE_URL = 'http://147.91.177.194:8000/v1/'
 DATABASE_USER = 'tim20'
 DATABASE_PASS = 'tim20'
 DATABASE_DB = 'Tim20'
