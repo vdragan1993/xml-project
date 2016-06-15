@@ -82,7 +82,7 @@ def get_document_from_uri(doc_uri):
     url = db.DATABASE_URL + "documents?uri=/" + doc_uri + "&database=Tim20"
     headers = {'Accept': 'text/html', 'charset': 'utf-8'}
     response = requests.get(url, headers=headers, auth=HTTPDigestAuth(db.DATABASE_USER, db.DATABASE_PASS))
-    if 200 <= response.status_code <= 300:
+    if 200 <= response.status_code < 300:
         print("File {0} successfully get from database!".format(doc_uri))
         file_location = "download/" + utils.get_file_name(doc_uri) + ".xml"
         f = open(file_location, "wb")
@@ -90,6 +90,31 @@ def get_document_from_uri(doc_uri):
         f.close()
         return file_location
     else:
-        print("Error during get {0} from database!".format(doc_uri))
+        print("Error during getting {0} from database!".format(doc_uri))
         return None
 
+
+def delete_document(file_name, collection):
+    """
+    Deletes xml document with given file name from given collection
+    :param file_name: file name
+    :param collection: database collection
+    """
+    doc_uri = collection + "/" + file_name
+    delete_document_from_uri(doc_uri)
+
+
+def delete_document_from_uri(doc_uri):
+    """
+    MarkLogic REST delete xml document from given document uri
+    :param doc_uri: document uri
+    """
+    url = db.DATABASE_URL + "documents?uri=/" + doc_uri + "&database=Tim20"
+    response = requests.delete(url, auth=HTTPDigestAuth(db.DATABASE_USER, db.DATABASE_PASS))
+    if 200 <= response.status_code < 300:
+        print("File {0} successfully deleted!".format(doc_uri))
+        utils.delete_from_content(doc_uri)
+        return
+    else:
+        print("Error during deleting {0} from database!".format(doc_uri))
+        return

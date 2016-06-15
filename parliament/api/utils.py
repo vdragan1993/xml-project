@@ -161,3 +161,19 @@ def write_to_content(doc_uri):
     f.write(line)
     f.close()
 
+
+def delete_from_content(doc_uri):
+    """
+    Remove document uri from list of existing documents in database
+    :param doc_uri: document name and collection
+    """
+    f = open("data/content.txt", "r")
+    lines = f.readlines()
+    f.close()
+
+    f = open("data/content.txt", "w")
+    for line in lines:
+        line = line[:-1]
+        if line != doc_uri:
+            write_to_content(line)
+    f.close()
