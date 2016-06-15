@@ -27,15 +27,23 @@
             
             <body>   
                 <h1>Amandman</h1>
+                <br />
                 <h3>za Akt &#160;<a href="{actionUrl}"><xsl:value-of select="/*/@uri"/></a></h3>
+                <br />
+                <br />
                 <h2><xsl:value-of select="/*/@operacija"/> za Član broj <xsl:value-of select="//a:clan/@rbr"/>. <i><xsl:value-of select="//a:clan[1]/@naslov"/></i></h2>
                 <br />
+                <br />
+                <br />
                 <h4>Predlog Amandmana</h4>
+                <br />
                 <p id="clan">
                     <xsl:value-of select="//a:clan"/>
                 </p>
                 <br />
+                <br />
                 <h4>Obrazloženje</h4>
+                <br />
                 <p id="obrazlozenje">
                     <xsl:value-of select="//b:obrazlozenje"/>
                 </p>

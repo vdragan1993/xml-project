@@ -1,6 +1,7 @@
 from lxml import etree, objectify
 from lxml.etree import XMLSyntaxError
 import os
+from xhtml2pdf import pisa
 
 
 # location of xsd
@@ -85,3 +86,50 @@ def transform_document_to_html(xml_file_path, doc_type='amendment'):
     f.write(result)
     f.close()
     print("File {0} generated successfully!".format(destination_path))
+    return destination_path
+
+
+css_amendment = "@page{size:a4 portrait; margin: 2cm;}"
+css_act = "@page{size:a4 portrait; margin: 2cm;}"
+
+
+def convert_xhtml_to_pdf(xhtml_string, destination_file, document_type='amendment'):
+    """
+    Converts given xhtml string to PDF.
+    :param xhtml_string: xhtml string
+    :param destination_file: pdf file location
+    :return: convertion status (0 - no errors)
+    """
+    result_file = open(destination_file, "w+b")
+    css = css_amendment
+    if document_type == 'act':
+        css = css_act
+
+    pisa_status = pisa.CreatePDF(xhtml_string, dest=result_file, default_css=css)
+    result_file.close()
+    print("File {0} generated successfully!".format(destination_file))
+    return pisa_status.err
+
+
+def transform_document_to_pdf(xml_file_path, doc_type='amendment'):
+    """
+    Transforms given xml file to html and places it in generate/pdf folder
+    :param xml_file_path: path to xml file
+    :param doc_type: act or amendment
+    :return: path to generated file
+    """
+    xml_file_name = get_file_name(xml_file_path)
+    destination_path = 'generate/pdf/' + xml_file_name + ".pdf"
+    remove_existing_file(destination_path)
+
+    xsl_file = xsl_amendment_pdf
+    if doc_type == 'act':
+        xsl_file = xsl_act_pdf
+
+    dom = etree.parse(xml_file_path)
+    xslt = etree.parse(xsl_file)
+    transform = etree.XSLT(xslt)
+    new_dom = transform(dom)
+    result = etree.tostring(new_dom, pretty_print=True)
+    convert_xhtml_to_pdf(result, destination_path, document_type=doc_type)
+    return destination_path
