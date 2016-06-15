@@ -7,27 +7,54 @@
         <html>
             <head>
                 <meta charset="UTF-8"/>
+                <style type="text/css">
+                    body { 
+                        margin-left: 20%;
+                        margin-right: 20%;
+                        margin-top: 3%;
+                        margin-bottom: 3%;
+                    }
+                </style>
             </head>
             <body style="font-family: Arial">
                 <div style="text-align: center; margin-bottom: 15px">
                     <img src="http://www.nirvot.org.rs/nsgrb2.gif" height="100" width="100"/>
                 </div>
                 
-                <xsl:apply-templates select="//b:preambula"/>
+                <p style="text-align: center">Broj sluzbenog glasnika: 
+                    <xsl:value-of select="b:akt/@br_sluzbenog_glasnika"/></p>
+                <xsl:value-of select="//preambula"/>
+                <!--<h2>
+                    <xsl:value-of select="//b:preambula"/>
+                </h2>-->
                 <h2 style="text-align: center">
                     <xsl:value-of select="b:akt/@naslov"/>
                 </h2>
-                <xsl:apply-templates select="b:akt/*[not(self::b:preambula)]"/>
+                <!--<h2>A</h2>
+                <h2>B</h2>
+                -->
+                
+
+                <xsl:apply-templates select="b:akt/*[not(self::preambula)]"/>
+                <br />
+                <br />
+                <p><xsl:value-of select="b:akt/@opstina"/>, <xsl:value-of select="b:akt/@grad"/></p>
+        <p><xsl:value-of select="b:akt/@drzava"/>, <xsl:value-of select="b:akt/@ustanova_organ"/></p>
+                
+                <p style="text-align: right">Datum: <xsl:value-of select="b:akt/@datum_kreiranja"/></p>
+                <p style="text-align: right"></p>
+                
+                <p style="text-align: right"><xsl:value-of select="b:akt/@predlagac"/></p>
             </body>
         </html>
     </xsl:template>
     
     <!-- Preambula -->
-    <xsl:template match="b:preambula">
+    <!--<xsl:template match="preambula">
         <p>
             <xsl:value-of select="."/>
         </p>
-    </xsl:template>
+    </xsl:template>-->
     
     <!-- Deo -->
     <xsl:template match="b:deo">
@@ -114,7 +141,7 @@
     <!-- Stav -->
     <xsl:template match="b:stav">
         <p>
-            <xsl:value-of select="b:tekst"/>
+            <xsl:value-of select="."/>
         </p>
         <xsl:choose>
             <xsl:when test="count(b:tacka) &gt; 0">
