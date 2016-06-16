@@ -88,6 +88,7 @@ def get_document_from_uri(doc_uri):
         f = open(file_location, "wb")
         f.write(response.content)
         f.close()
+        utils.clean_xml_file(file_location)
         return file_location
     else:
         print("Error during getting {0} from database!".format(doc_uri))
@@ -178,3 +179,16 @@ def update_document(data, doc_uri):
         return
     else:
         print("Error during updating {0}!".format(doc_uri))
+
+
+def text_search(text):
+    """
+    Performs text search on MarkLogic database.
+    :param text: query
+    :return: list of document uri
+    """
+    url = db.DATABASE_URL + "search?q=" + text + "&database=Tim20"
+    headers = {'Accept': 'text/xml'}
+    response = requests.get(url, headers=headers, auth=HTTPDigestAuth(db.DATABASE_USER, db.DATABASE_PASS))
+    result = response.content.decode('utf8')
+    return utils.parse_search_results(result)
