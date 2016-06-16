@@ -1,7 +1,10 @@
 body {
   padding-top: 30px;
   padding-bottom: 40px;
-    background-color: #eee;
+    background-image: url("../images/pozadina.jpg");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    background-attachment:fixed;
 }
 
 .form-signin {
@@ -39,9 +42,22 @@ body {
   border-top-right-radius: 0;
 }
 .div-jana{
-    background-image: url("../images/background.png");
     background-repeat: no-repeat;
     background-position: 100%;
     width: 35cm;
     height: 12cm;
+}
+
+.login-div {
+    margin: 0 auto;
+    display:block;
+    background:#eee;
+    width:50%;
+    position: relative;
+    padding: 4%;
+    border-radius: 5%;"
+}
+
+.acts-div {
+
 }

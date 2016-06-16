@@ -1,4 +1,4 @@
-<div class="container" style="background: #F5F5F5" ng-controller="AllActsCtrl">
+<div class="container wider">
     <div class="page-header">
        <h2>Pretražite akte</h2>
     </div>
@@ -6,7 +6,7 @@
     <div class="cover-container" >
         <form ng-submit="sSearch()">
             <input type="text" class="form-control pull-left" style="width: 67%" ng-model="ssearch.text" >
-            <button type="button" class="button btn-primary btn-block btn-sm pull-right" style="width: 30%; height: 35px" ng-click="sSearch()" ng-model="show"> Traži</button>
+            <button type="submit" class="button btn-primary btn-block btn-sm pull-right" style="width: 30%; height: 35px"> Traži</button>
         </form>
         <br><br>
             <button type="button" class="button btn-success btn-block btn-sm pull-right" style="width: 30%; height: 35px"> Napredna pretraga...</button>
@@ -15,7 +15,7 @@
 </div>
 <br><br><br>
 
-<div class="container" style="background: #F5F5F5" ng-show="show" style="max-width: 1500px">
+<div class="container wider" style="background: #F5F5F5;" ng-show="show">
     <div class="page-header">
        <h2>Rezultati pretrage:</h2>
     </div>
