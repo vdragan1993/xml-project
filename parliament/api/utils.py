@@ -3,7 +3,7 @@ from lxml.etree import XMLSyntaxError
 import os
 from xhtml2pdf import pisa
 import io
-import api.database as db
+from api.database import get_document_from_uri, update_document_from_string_uri
 
 
 # location of xsd
@@ -244,7 +244,7 @@ def accept_amendment(amendment_path, act_path, doc_uri):
     # return text
     new_act = etree.tostring(act_dom, pretty_print=True)
     new_act_string = new_act.decode("utf8")
-    db.update_document_from_string_uri(new_act_string, doc_uri)
+    update_document_from_string_uri(new_act_string, doc_uri)
     print("Amendment acceptance successful!")
 
 
@@ -254,8 +254,8 @@ def accept_amendment_uri(amendment_uri, act_uri):
     :param amendment_uri: amednment document uri
     :param act_uri: act document uri
     """
-    amendment = db.get_document_from_uri(amendment_uri)
-    act = db.get_document_from_uri(act_uri)
+    amendment = get_document_from_uri(amendment_uri)
+    act = get_document_from_uri(act_uri)
     accept_amendment(amendment, act, act_uri)
     remove_existing_file(amendment)
     remove_existing_file(act)

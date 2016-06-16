@@ -1,5 +1,4 @@
-import api.database as db
-import api.utils as utils
+
 from django.shortcuts import render
 from rest_framework.parsers import JSONParser
 from django.http import JsonResponse
