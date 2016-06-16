@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0"?>
 <xsl:stylesheet xmlns="http://www.w3.org/1999/xhtml" xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:b="http://ftn.uns.ac.rs/xml"
     version="2.0">
@@ -17,9 +17,7 @@
                 </style>
             </head>
             <body style="font-family: Arial">
-                <div style="text-align: center; margin-bottom: 15px">
-                    <img src="http://www.nirvot.org.rs/nsgrb2.gif" height="100" width="100"/>
-                </div>
+               
                 
                 <p style="text-align: center">Broj sluzbenog glasnika: 
                     <xsl:value-of select="b:akt/@br_sluzbenog_glasnika"/></p>
