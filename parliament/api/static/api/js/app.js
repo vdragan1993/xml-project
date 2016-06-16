@@ -29,6 +29,26 @@
                 templateUrl: '/static/api/pages/home_alderman.html',
                 controller: 'HomeAldermanCtrl'
             })
+            .when('/all_conferences',{
+                templateUrl: '/static/api/pages/all_conferences.html',
+                controller: 'AllConferencesCtrl'
+            })
+            .when('/new_conference',{
+                templateUrl: '/static/api/pages/new_conference.html',
+                controller: 'NewConferenceCtrl'
+            })
+            .when('/all_acts',{
+                templateUrl: '/static/api/pages/all_acts.html',
+                controller: 'AllActsCtrl'
+            })
+            .when('/new_act',{
+                templateUrl: '/static/api/pages/new_act.html',
+                controller: 'NewActCtrl'
+            })
+            .when('/pending_acts',{
+                templateUrl: '/static/api/pages/pending_acts.html',
+                controller: 'PendingActsCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

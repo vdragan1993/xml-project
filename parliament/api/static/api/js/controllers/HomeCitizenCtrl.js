@@ -8,5 +8,6 @@
     angular.module('parliamentApp.HomeCitizenCtrl', [])
         .controller('HomeCitizenCtrl', function($rootScope, $scope, $location){
            $scope.message = "Dobrodosli gradjanine!";
+            $scope.citizen = "citizen";
         });
 }(angular));

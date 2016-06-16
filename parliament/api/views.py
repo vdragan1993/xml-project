@@ -29,10 +29,3 @@ def users(request):
             return JsonResponse(response)
 
 
-@csrf_exempt
-def logout(request):
-    print("pozove logout u view")
-    response = {}
-    string = 'izlogovan'
-    response['poruka'] = string
-    return JsonResponse(response)

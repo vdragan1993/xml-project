@@ -1,0 +1,36 @@
+
+<div class="container" ng-controller="PendingActsCtrl">
+    <div class="page-header">
+       <h2>Akti u proceduri</h2>
+    </div>
+
+    <div class="cover-container">
+        <div class="row">
+        <div class="row col-md-20 center-block">
+              <table class="table table-bordered center-block" style="width:600px">
+                  <thead>
+                    <th>Rbr.</th>
+                    <th>Naziv</th>
+                    <th colspan="3"></th>
+
+                  </thead>
+                  <tbody>
+                  <!--ZA SVAKI AKT NOVI RED -->
+                  <tr>
+                      <td><p>1</p></td>
+                      <td><p>Akt 1</p></td>
+                      <td><button type="button" class="button btn-xs btn-warning center-block"> XML</button></td>
+                      <td><button type="button" class="button btn-xs btn-danger center-block">PDF</button></td>
+                      <td><button type="button" class="button btn-xs btn-primary center-block"> HTML</button></td>
+                      <td><button type="button" class="button btn-sm btn-default center-block" ng-click="addAmandmen()"> Predloži amandman</button></td>
+                  </tr>
+
+                  </tbody>
+              </table>
+        </div>
+      </div>
+    </div>
+
+</div>
+
+

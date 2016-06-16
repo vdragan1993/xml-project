@@ -1,0 +1,30 @@
+
+
+<div class="container" ng-controller="NewActCtrl">
+    <div class="page-header">
+       <h2>Kreirajte novi akt</h2>
+       <p>[[message]]</p>
+    </div>
+
+  <div class="container">
+     <div class="row">
+        <div class="row col-md-20 center-block">
+            <form method="post" ng-submit="createAct()">
+              <table class="table table-bordered center-block" style="width:600px">
+                  <tbody>
+                  <tr>
+                      <th>Naslov:</th>
+                      <td> <input type="text" min="0" name="za" ng-model="conference.for" required=""></td>
+                  </tr>
+
+                  <tr>
+                      <td colspan="2"> <button type="submit" class="button btn-lg btn-success center-block" style="width: 300px"> Kreiraj </button></td>
+                  </tr>
+                  </tbody>
+              </table>
+            </form>
+        </div>
+      </div>
+  </div>
+
+</div>

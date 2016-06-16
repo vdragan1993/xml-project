@@ -7,5 +7,12 @@
         'parliamentApp.HomePresidentCtrl',
         'parliamentApp.HomeAldermanCtrl',
         'parliamentApp.LogoutCtrl',
+        'parliamentApp.AllConferencesCtrl',
+        'parliamentApp.NewConferenceCtrl',
+        'parliamentApp.AllActsCtrl',
+        'parliamentApp.PendingActsCtrl'
+
+
+
     ]);
 }(angular));

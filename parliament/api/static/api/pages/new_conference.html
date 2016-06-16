@@ -1,0 +1,44 @@
+
+
+<div class="container" ng-controller="NewConferenceCtrl">
+    <div class="page-header">
+       <h2>Kreirajte novu sjednicu</h2>
+       <p>[[message]]</p>
+    </div>
+
+    <div class="row col-md-20 center-block">
+        <form method="post" ng-submit="createConference()">
+              <table class="table table-bordered center-block" style="width:600px">
+                  <tbody>
+                  <tr>
+                      <th>Za:</th>
+                      <td> <input type="number" min="0" name="za" ng-model="conference.for" required=""></td>
+                  </tr>
+
+                  <tr>
+                      <th>Protiv:</th>
+                      <td> <input type="number" min="0" name="protiv" ng-model="conference.against" required=""></td>
+                  </tr>
+
+                  <tr>
+                      <th>Uzdržano:</th>
+                      <td> <input type="number" min="0" name="uzdrzano" ng-model="conference.abstained" required=""></td>
+                  </tr>
+
+                  <tr>
+                      <th>Lista akata:</th>
+                      <td> Ovdje ce biti akt 1 <br>
+                            Ovdje ce biti akt 2 <br>
+                      </td>
+                  </tr>
+
+                  <tr>
+                      <td colspan="2"> <button type="submit" class="button btn-lg btn-success center-block" style="width: 300px"> Kreiraj </button></td>
+                  </tr>
+                  </tbody>
+              </table>
+        </form>
+    </div>
+
+
+</div>

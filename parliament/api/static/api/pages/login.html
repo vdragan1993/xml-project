@@ -1,11 +1,23 @@
-<div ng-controller="LoginCtrl" class="login-page">
-  <div class="form">
-      <h1>Dobrodošli na naš sajt. Molimo ulogujte se.</h1>
-      [[message]]
-    <form class="login-form" ng-submit="login()">
-      <input type="text" placeholder="Korisničko ime" ng-model = 'user.username'/>
-      <input type="password" placeholder="Lozinka" ng-model = 'user.password'/>
-      <input type="submit" value="Uloguj se">
-    </form>
-  </div>
+<div class="div-jana">
+    <div>
+        <h2 class="text-center">Informacioni sistem skupštine grada Novi Sad. Dobrodošli!
+            <br> Molimo ulogujte se.
+        </h2>
+    </div>
+
+    <div class="container-fluid">
+        <div ng-controller="LoginCtrl">
+
+            <div class="form">
+                <p class="text-center"> <b style="color: #122b40">[[message]]</b> </p>
+                <form class="form-signin" ng-submit="login()">
+                    <label for="inputUsername" class="sr-only">Korisničko ime</label>
+                    <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Korisničko ime" ng-model = 'user.username' required autofocus>
+                    <label for="inputPassword" class="sr-only">Lozinka</label>
+                    <input type="password" id="inputPassword" name="inputPassword" class="form-control" placeholder="Lozinka" ng-model = 'user.password' required>
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Uloguj se</button>
+                </form>
+             </div>
+        </div>
+    </div>
 </div>

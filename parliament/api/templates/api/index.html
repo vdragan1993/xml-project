@@ -6,25 +6,24 @@
     <title>Skupština grada Novog Sada</title>
     <base href="/"/>
     <!-- Styles -->
+    {% load staticfiles %}
     <link rel="icon" href="{% static 'api/images/favico3.png' %}">
 
-    <link rel="stylesheet" href="{% static 'api/css/animate.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/bootstrap.css' %}" type="text/css">
     <link rel="stylesheet" href="{% static 'api/css/bootstrap.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'api/css/et-line-font.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'api/css/font-awesome.min.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'api/css/nivo-lightbox.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'api/css/style.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'api/css/layout.css' %}" type="text/css">
-    <link rel="stylesheet" href="{% static 'api/css/login.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/signin.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'api/css/sticky-footer.css' %}" type="text/css">
+
 
     <!-- Angular Libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.0/angular-route.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.10/ngStorage.min.js"></script>
     <!-- Angular Scripts -->
+    <script type="application/javascript" src="{% static 'api/js/jquery.min.js' %}"></script>
     <script type="application/javascript" src="{% static 'api/js/app.js' %}"></script>
     <script type="application/javascript" src="{% static 'api/js/controllers.js' %}"></script>
-    <script type="application/javascript" src=""></script>
+    <script type="application/javascript" src="{% static 'api/js/bootstrap.min.js' %}"></script>
     <!-- Angular Controllers -->
     <script type="text/javascript" src="{% static 'api/js/controllers/LoginCtrl.js' %}"></script>
      <script type="text/javascript" src="{% static 'api/js/controllers/LogoutCtrl.js' %}"></script>
@@ -32,26 +31,62 @@
     <script type="text/javascript" src="{% static 'api/js/controllers/HomePresidentCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/HomeAldermanCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/HomeCitizenCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/AllConferencesCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/NewConferenceCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/AllActsCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/NewActCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/PendingActsCtrl.js' %}"></script>
     <!-- Angular Services -->
     <script type="text/javascript" src=""></script>
     <!-- Other scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script type="application/javascript" src="{% static 'api/js/login.js' %}"></script>
+    <script type="application/javascript" src="{% static 'api/js/bootstrap.min.js' %}"></script>
+    <script type="application/javascript" src="{% static 'api/js/bootstrap.js' %}"></script>
+
 </head>
 <body ng-app="parliamentApp">
 
 <!-- Navigation bar -->
-<div ng-if="user" class="wrapper row5">
-  <div id="topbar" class="clear">
-    <nav>
-      <ul>
-          <li><a href="" title="Akti" >Akti</a></li>
-          <li><a href="" title="Amandmani" >Amandmani</a></li>
-          <li><a href="" title="Sjednica" >Sjednica</a></li>
-            <li ng-controller="LogoutCtrl"><a href="" title="Odjavi se" ng-click="logout()" >Odjavi se</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>
+<div class="container-jana-navbar" ng-if="user">
+
+      <!-- Static navbar -->
+      <nav class="navbar navbar-default">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand">Skupština Novi Sad</a>
+          </div>
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="/president" ng-if="user.is_superuser && user.is_staff"> Početna</a></li>
+              <li><a href="/alderman" ng-if="user.is_superuser==false && user.is_staff"> Početna</a></li>
+              <li><a href="/citizen" ng-if="user.is_superuser==false && user.is_staff==false"> Početna</a></li>
+              <li><a href="/all_acts" ng-if="user.is_superuser==false && user.is_staff==false"> Akti</a></li>
+
+                <li class="dropdown" ng-if="user.is_superuser==false && user.is_staff">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Akti <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/all_acts">Svi akti</a></li>
+                    <li role="separator" class="divider"></li>
+                  <li><a href="/new_act" >Novi akt</a></li>
+                </ul>
+              </li>
+              <li><a href="/pending_acts" ng-if="user.is_staff"> Akti u proceduri</a></li>
+                <li class="dropdown" ng-if="user.is_superuser && user.is_staff">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sjednica <span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                  <li><a href="/all_conferences">Pregled svih sjednica</a></li>
+                    <li role="separator" class="divider"></li>
+                  <li><a href="/new_conference">Nova sjednica</a></li>
+                </ul>
+              </li>
+              <li ng-controller="LogoutCtrl"><a href="" title="Odjavi se" ng-click="logout()">Odjavi se</a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </nav>
+
+    </div> <!-- /container -->
 
 
 <!-- View -->
@@ -61,7 +96,7 @@
 
 <!-- Footer -->
 <div class="wrapper row5">
-  <footer id="copyright" class="clear">
+  <footer id="copyright" class="footer">
     <p class="text-center">Copyright &copy; 2016. Pineapple team</p>
   </footer>
 </div>

@@ -7,7 +7,7 @@
 
     angular.module('parliamentApp.LogoutCtrl', [])
         .controller('LogoutCtrl', function($rootScope, $scope, $location,$http){
-                $scope.user=$rootScope.user;
+
 
                 $scope.logout = function () {
                     $scope.message = 'Uspešno ste se izlogovali.';
