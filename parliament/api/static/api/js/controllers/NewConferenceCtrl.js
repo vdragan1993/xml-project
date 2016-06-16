@@ -12,10 +12,9 @@
                 $location.path("/new_conference");
             }
 
-            $scope.createConference = function () {
-                $scope.message = "pozvana funkcija!";
-                console.log("pozvna funkcija!");
-                $location.path("/new_conference");
+            $scope.createAmendment = function (data) {
+                console.log("pozvana funkcija za kreiranje amandmana!");
+                $location.path("/all_acts");
 		        };
         });
 }(angular));

@@ -45,9 +45,9 @@
                 templateUrl: '/static/api/pages/new_act.html',
                 controller: 'NewActCtrl'
             })
-            .when('/pending_acts',{
-                templateUrl: '/static/api/pages/pending_acts.html',
-                controller: 'PendingActsCtrl'
+            .when('/new_amendment',{
+                templateUrl: '/static/api/pages/new_amendment.html',
+                controller: 'NewAmendmentCtrl'
             })
             .otherwise({
                 redirectTo: '/'

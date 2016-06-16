@@ -1,10 +1,10 @@
 <div class="container" style="background: #F5F5F5; max-width: 1000px;" ng-controller="NewActCtrl">
     <div class="page-header">
-       <h2>Kreirajte novi akt</h2>
+       <h2>Kreirajte novi amandman na akt [[amendment.name]]:</h2>
     </div>
 
   <div class="cover-container pull-left" style=" max-width: 45%; width: 45%">
-            <form method="post" ng-submit="createAct()">
+            <form method="post" ng-submit="createAmendment(amendment)">
               <table class="table table-responsive" style="max-width: 900px">
                   <thead>
                   <th colspan="2" class="text-center">Unesite podatke:</th>
@@ -28,14 +28,15 @@
 
 
 
-    <div class="cover-container pull-right" style=" max-width: 45%; width: 45%">
-            <p class="text-center"><b>Učitajte akt sa kompjutera:</b></p>
+     <div class="cover-container pull-right" style=" max-width: 45%; width: 45%">
+            <p class="text-center"><b>Učitajte amandman sa kompjutera:</b></p>
             <br>
             <form method="post" class="center-block">
-                <input type="file" class="center-block" name="act" ng-model="document.act" accept=".docx|.xlsx|.pptx"/> <br>
+                <input type="file" class="center-block" name="act" ng-model="document.amendment" accept=".docx|.xlsx|.pptx"/> <br>
                 <button type="submit" class="button btn-lg btn-primary center-block" > Potvrdi </button></td>
             </form>
   </div>
+
 
 
 </div>

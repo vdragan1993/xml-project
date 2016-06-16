@@ -10,7 +10,7 @@
         'parliamentApp.AllConferencesCtrl',
         'parliamentApp.NewConferenceCtrl',
         'parliamentApp.AllActsCtrl',
-        'parliamentApp.PendingActsCtrl'
+        'parliamentApp.NewAmendmentCtrl'
 
 
 

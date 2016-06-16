@@ -35,7 +35,7 @@
     <script type="text/javascript" src="{% static 'api/js/controllers/NewConferenceCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/AllActsCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/NewActCtrl.js' %}"></script>
-    <script type="text/javascript" src="{% static 'api/js/controllers/PendingActsCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/NewAmendmentCtrl.js' %}"></script>
     <!-- Angular Services -->
     <script type="text/javascript" src=""></script>
     <!-- Other scripts -->
@@ -45,11 +45,10 @@
     <script type="application/javascript" src="{% static 'api/js/bootstrap.js' %}"></script>
 
 </head>
-<body ng-app="parliamentApp">
+<body ng-app="parliamentApp" background="{% static 'api/images/back.png' %}">
 
 <!-- Navigation bar -->
 <div class="container-jana-navbar" ng-if="user">
-
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -71,7 +70,7 @@
                   <li><a href="/new_act" >Novi akt</a></li>
                 </ul>
               </li>
-              <li><a href="/pending_acts" ng-if="user.is_staff"> Akti u proceduri</a></li>
+              <li><a href="" ng-if="user.is_staff"> Istorija</a></li>
                 <li class="dropdown" ng-if="user.is_superuser && user.is_staff">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sjednica <span class="caret"></span></a>
                 <ul class="dropdown-menu">
@@ -85,8 +84,7 @@
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
       </nav>
-
-    </div> <!-- /container -->
+</div> <!-- /container -->
 
 
 <!-- View -->

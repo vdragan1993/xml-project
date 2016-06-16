@@ -12,8 +12,8 @@
                 $location.path("/new_act");
             }
 
-            $scope.createConference = function () {
-                console.log("pozvna funkcija!");
+            $scope.createAct = function () {
+                console.log("pozvna funkcija za kreiranje akta!");
                 $location.path("/new_act");
 		        };
         });

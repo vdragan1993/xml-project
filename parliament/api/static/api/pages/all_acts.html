@@ -1,17 +1,50 @@
-<div class="container" ng-controller="AllActsCtrl">
+<div class="container" style="background: #F5F5F5" ng-controller="AllActsCtrl">
     <div class="page-header">
        <h2>Pretražite akte</h2>
     </div>
 
-    <div class="cover-container">
+    <div class="cover-container" >
         <form ng-submit="sSearch()">
-           <input type="text" class="form-control pull-left" style="width: 67%" ng-model="ssearch.text" >
-            <button type="submit" class="button btn-primary btn-block btn-sm pull-right" style="width: 30%; height: 35px"> Traži</button>
+            <input type="text" class="form-control pull-left" style="width: 67%" ng-model="ssearch.text" >
+            <button type="button" class="button btn-primary btn-block btn-sm pull-right" style="width: 30%; height: 35px" ng-click="sSearch()" ng-model="show"> Traži</button>
         </form>
         <br><br>
             <button type="button" class="button btn-success btn-block btn-sm pull-right" style="width: 30%; height: 35px"> Napredna pretraga...</button>
     </div>
+<br><br><br>
+</div>
+<br><br><br>
 
+<div class="container" style="background: #F5F5F5" ng-show="show" style="max-width: 1500px">
+    <div class="page-header">
+       <h2>Rezultati pretrage:</h2>
+    </div>
+    <div class="cover-container" >
+        <table class="table table-bordered" style="max-width: 900px">
+            <thead>
+                <th>Rbr.</th>
+                <th>Naziv</th>
+                <th>Tip</th>
+                <th colspan="3"></th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in imaginary">
+                    <td>[[$index +1]].</td>
+                    <td>[[i.name]]</td>
+                    <td>[[i.type]]</td>
+                    <td><button type="button" class="btn btn-warning center-block"> XML</button></td>
+                    <td><button type="button" class="btn btn-danger center-block">PDF</button></td>
+                    <td><button type="button" class="btn btn-info center-block"> HTML</button></td>
+                    <td>
+                        <button type="button" class="btn btn-default center-block" ng-click="addAmandmen(i.uri)" ng-if="user.is_superuser==false && user.is_staff && i.proces=='Usvojen'"> Predloži amandman</button>
+                        <p ng-if="user.is_superuser==false && user.is_staff==false">[[i.proces]]</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<br><br>
 </div>
 
 
