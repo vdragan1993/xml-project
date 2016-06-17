@@ -35,7 +35,7 @@
                             $location.path("/citizen");
                         }
                         else
-                            $scope.message = 'Netačno korisničko ime ili lozinka!'
+                            $scope.message = 'Netačno korisničko ime ili lozinka!';
                     });
 		        };
 

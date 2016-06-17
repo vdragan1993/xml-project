@@ -7,24 +7,20 @@
 
     angular.module('parliamentApp.AllActsCtrl', [])
         .controller('AllActsCtrl', function($rootScope, $scope, $location, $http){
-           $scope.message = $rootScope.user.username;
             $scope.show = false;
+            $scope.showAll = false;
             $scope.trazi = true;
             $scope.napredna = false;
             $scope.noresults = false;
-
-            /*
-            $scope.imaginary=[{uri:"stagod",name:"kakosezove", type:"Akt", proces:"Usvojen"},
-                    {uri:"stagod2",name:"kakosezove2", type:"Akt", proces:"U procesu"},
-                    {uri:"stagod3",name:"kakosezove3", type:"Akt", proces:"Usvojen"}];
-            */
+            $scope.user = $rootScope.user;
+            console.log($scope.user.username);
             $scope.imaginary = [];
 
-           $scope.sSearch = function () {
+            $scope.sSearch = function () {
                 console.log("pozvana funkcija za prostu pretragu!");
+               if($scope.show==true) $scope.show=false;
                if ($scope.ssearch!=undefined) {
                    console.log($scope.ssearch);
-                   var pretraga = $scope.ssearch;
                    $http({
                         method: 'POST',
                         url: '/api/simple_search/',
@@ -32,18 +28,21 @@
                     }).then(function success(response) {
                        if (response.data[0].message == 'Nema rezultata')
                        {
-                            console.log(response.data[0].message);
+                           console.log(response.data[0].message);
+                           $scope.noresults=true;
+                           $scope.show=false;
                        }
                        else {
                            $scope.imaginary = response.data;
                            $scope.show = true;
                        }
                 });
-
                }
                else {
                    console.log("niste nista uneli");
                    $scope.noresults = true;
+                   $scope.imaginary = [];
+                   $scope.show = false;
                }
 		   };
 
@@ -89,20 +88,34 @@
 
             $scope.aSearch= function () {
                 console.log("pozvana funkcija za naprednu pretragu!",$scope.akt);
-                $http({
+                 if($scope.akt.operator ==undefined || $scope.akt.operator=="" ){
+                    console.log("usla u if");
+                    $scope.akt.operator = "AND";
+                }
+                if($scope.akt.naslov==undefined && $scope.akt.datum_usvajanja==null && $scope.akt.predlagac==undefined && $scope.akt.datum_pocetka_vazenja==null &&
+                $scope.akt.datum_kreiranja==null && $scope.akt.prestanak_vazenja==null && $scope.akt.status==null && $scope.akt.za==null
+                && $scope.akt.br_sluzbenog_glasnika==null && $scope.akt.protiv==null && $scope.akt.kategorija==null && $scope.akt.uzdrzani==null){
+                    console.log("prazno!");
+                    $scope.noresults = true;
+                    $scope.show = false;
+                } else {
+                    $http({
                         method: 'POST',
                         url: '/api/akti/',
-                        data: { 'akt' : $scope.akt }
+                        data: {'akt': $scope.akt}
                     }).then(function success(response) {
-                   if (response.data[0].message == 'Nema rezultata')
-                       {
+                        if (response.data[0].message == 'Nema rezultata') {
                             console.log(response.data[0].message);
-                       }
-                       else {
-                           $scope.imaginary = response.data;
-                           $scope.show = true;
-                       }
-                });
+                            $scope.noresults = true;
+                            $scope.show = false;
+                        }
+                        else {
+                            $scope.imaginary = response.data;
+                            $scope.show = true;
+                            $scope.noresults = false;
+                        }
+                    });
+                }
 		   };
 
             $scope.addAmandmen = function (data) {
@@ -111,14 +124,19 @@
                 $location.path("/new_amendment");
 		   };
 
-            $scope.prikaziSve= function(){
+            $scope.showAll= function(){
                 $http({
                     method:"GET",
                     url:"/api/svi/"
                 }).then(function success(response){
                     $scope.imaginary= response.data;
-                   $scope.show= true;
+                   if($scope.show == false) $scope.show=true;
+                    else $scope.show=false;
                 });
+            };
+
+            $scope.clearFields = function() {
+                $scope.akt = null;
             };
 
         });

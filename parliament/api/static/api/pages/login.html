@@ -1,15 +1,16 @@
 <div class="div-jana login-div">
     <div>
-        <h2 class="text-center">Informacioni sistem skupštine grada Novi Sad. Dobrodošli!
-            <br> Molimo ulogujte se.
+        <h2 class="text-center">Informacioni sistem Skupštine Grada Novog Sada. Dobrodošli!
         </h2>
     </div>
 
     <div class="container-fluid">
-        <div ng-controller="LoginCtrl">
+        <div>
 
             <div class="form">
-                <p class="text-center"> <b style="color: #122b40">[[message]]</b> </p>
+                <div class="alert alert-danger " ng-if="message!=''">
+                    <strong class="text-center">[[message]]</strong>
+                </div>
                 <form class="form-signin" ng-submit="login()">
                     <label for="inputUsername" class="sr-only">Korisničko ime</label>
                     <input type="text" id="inputUsername" name="inputUsername" class="form-control" placeholder="Korisničko ime" ng-model = 'user.username' required autofocus>

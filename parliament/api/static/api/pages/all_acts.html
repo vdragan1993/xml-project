@@ -10,11 +10,11 @@
 <div class="container wider" ng-show="trazi">
     <div class="cover-container" >
 
-        <form ng-submit="sSearch()">
+        <form ng-submit="sSearch();">
             <input type="text" class="form-control pull-left" style="width: 50%" ng-model="ssearch" >
             <button type="submit" class="button btn-primary btn-block btn-sm pull-left" style="width: 10%; height: 35px;"> Traži</button>
         </form>
-        <button type="button" ng-click="prikaziSve(); noresults=false" class="button btn-success btn-block btn-sm pull-right" style="width: 20%; height: 35px;margin-right: 10%;"> Prikaži sve</button>
+        <button type="button" ng-click="showAll(); noresults=false" class="button btn-success btn-block btn-sm pull-right" style="width: 20%; height: 35px;margin-right: 10%;"> Prikaži sve</button>
 <br><br>.
     </div>
 </div>
@@ -75,13 +75,16 @@
                 </tr>
             </table>
                 <br>
-            <select class="form-control pull-left" style="width:100px; height: 30px;" ng-model="akt.operator">
-                <option selected>AND</option>
-                <option>OR</option>
-            </select>
 
+            <div class="cover-container">
+                <select class="form-control pull-left" style="width:90px; height: 30px;" ng-model="akt.operator">
+                    <option selected>AND</option>
+                    <option>OR</option>
+                </select> &nbsp; &nbsp;
+            <input ng-click="show=true; noresults=false" type="submit" class="button btn-primary btn-block btn-sm pull-left" style="width: 10%; height: 35px; margin-left:10px" value = "Pretraži" >
+            <button type="button" ng-click="show=false; noresults=false; clearFields()" class="button btn-warning btn-block btn-sm pull-right" style="width: 10%; height: 35px; margin-top:0px"> Očisti polja </button>
+            </div>
 
-            <input ng-click="show=true; noresults=false" type="submit" class="button btn-primary btn-block btn-sm" style="width: 10%; height: 35px;" value = "Pretraži" >
         </form>
 <br><br>
     </div>
@@ -98,8 +101,9 @@
                 <th>Rbr.</th>
                 <th>Naziv</th>
                 <th>Tip</th>
-                <th colspan="3"></th>
-                <th></th>
+                <th colspan="3" class="text-center"> Preuzmi </th>
+                <th ng-if="user.is_staff==false && user.is_superuser==false">Status</th>
+                <th ng-if="user.is_staff">Akcije</th>
             </thead>
             <tbody>
                 <tr ng-repeat="i in imaginary">
@@ -111,7 +115,8 @@
                     <td><button type="button" class="btn btn-info center-block" ng-click="downloadPDF('html'+i.uri)"> HTML</button></td>
                     <td>
                         <button type="button" class="btn btn-default center-block" ng-click="addAmandmen(i.uri)" ng-if="user.is_staff && i.proces!='usvojen' && i.type=='akt'"> Predloži amandman</button>
-                        <p ng-if="user.is_superuser==false && user.is_staff==false">[[i.proces]]</p>
+                        <p ng-if="user.is_superuser==false && user.is_staff==false && i.proces=='proces'">U proceduri</p>
+                        <p ng-if="user.is_superuser==false && user.is_staff==false && i.proces=='usvojen'">Usvojen</p>
                     </td>
                 </tr>
             </tbody>
