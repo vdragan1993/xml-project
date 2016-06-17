@@ -291,3 +291,39 @@ def uri_reader(uri_string):
     if 'usvojen' in uri_string:
         status = 'usvojen'
     return name, collection, doc_type, status
+
+
+def get_uries_from_content():
+    """
+    Returns all act uries from database.
+    :return: list of act uries
+    """
+    f = open('data/content.txt', 'r')
+    lines = f.readlines()
+    f.close()
+    ret_val = []
+    for line in lines:
+        line = line[:-1]
+        name, collection, doc_type, status = uri_reader(line)
+        if doc_type == 'akt':
+            ret_val.append(line)
+    return ret_val
+
+
+def contains_metadata(file_path, metadata, value):
+    """
+    Checks if file at given path contains given metadata with given value
+    :param file_path: file path
+    :param metadata: metadata attribute
+    :param value: metadata value
+    :return: True or False
+    """
+    f = open(file_path, 'rb')
+    f_data = f.read().decode('utf8')
+    f_content = io.StringIO(f_data)
+    f_dom = etree.parse(f_content)
+    real_value = f_dom.xpath("/*/@" + metadata)
+    if len(real_value) > 0:
+        return real_value[0] == value
+    else:
+        return False

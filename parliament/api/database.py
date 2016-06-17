@@ -192,3 +192,51 @@ def text_search(text):
     response = requests.get(url, headers=headers, auth=HTTPDigestAuth(db.DATABASE_USER, db.DATABASE_PASS))
     result = response.content.decode('utf8')
     return utils.parse_search_results(result)
+
+
+def advanced_search(attribute, value):
+    """
+    Performs advanced search for one attribute and value.
+    :param attribute: attribute
+    :param value: value
+    :return: list of act uri
+    """
+    uris = utils.get_uries_from_content()
+    ret_val = []
+    for uri in uris:
+        file_path = get_document_from_uri(uri)
+        if utils.contains_metadata(file_path, attribute, value):
+            ret_val.append(uri)
+        utils.remove_existing_file(file_path)
+    return ret_val
+
+
+def advanced_search_list(attributes, values, operator):
+    """
+    Performs advanced search on list of attribute-value pairs.
+    :param attributes: list of attributes
+    :param values: list of values
+    :param operator: AND - OR
+    :return: list of act uri
+    """
+    uris = utils.get_uries_from_content()
+    ret_val = {}
+    for uri in uris:
+        ret_val[uri] = 0
+
+    for i in range(0, len(attributes)):
+        this_results = advanced_search(attributes[i], values[i])
+        for result in this_results:
+            ret_val[result] += 1
+
+    total_results = []
+    if operator == 'AND':
+        for k, v in ret_val.items():
+            if v == len(attributes):
+                total_results.append(k)
+    elif operator == 'OR':
+        for k, v in ret_val.items():
+            if v > 0:
+                total_results.append(k)
+
+    return total_results
