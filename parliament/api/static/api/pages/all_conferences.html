@@ -14,8 +14,8 @@
                 <th>Datum održavanja</th>
                 <th style="max-width: 30px">Za</th>
                 <th style="max-width: 30px">Protiv</th>
-                <th style="max-width: 40px">Uzdržani</th>
-                <th style="max-width: 40px">Usvojeno</th>
+                <th style="max-width: 45px">Uzdržani</th>
+                <th style="max-width: 50px">Usvojeno</th>
             </thead>
             <tbody>
                 <tr ng-repeat="c in conferences">
@@ -25,7 +25,7 @@
                     <td>[[c.for]]</td>
                     <td>[[c.against]]</td>
                     <td>[[c.abstained]]</td>
-                    <td>[[c.received.length]]</td>
+                    <td>[[c.received]]</td>
                 </tr>
             </tbody>
         </table>

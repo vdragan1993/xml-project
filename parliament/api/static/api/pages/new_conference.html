@@ -1,8 +1,12 @@
 <div class="container wider">
     <div class="page-header text-center">
        <h2>Kreirajte novu sjednicu</h2>
-       <p style="color:darkgreen">[[message]]</p>
-       <p style="color:darkred">[[message2]]</p>
+        <div class="alert alert-success" ng-if="message!=''">
+            <strong>Uspjeh!</strong> [[message]]
+        </div>
+       <div class="alert alert-danger" ng-if="message2!=''">
+            <strong>Greška!</strong> [[message2]]
+        </div>
     </div>
 
         <form method="post" ng-submit="createConference()">

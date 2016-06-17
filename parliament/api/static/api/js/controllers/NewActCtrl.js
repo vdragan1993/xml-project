@@ -21,7 +21,8 @@
                         data: { 'act' : $scope.act }
                     }).then(function success(response) {
                         console.log("poslala sam paramete akta");
-                        $scope.message = "Uspješno ste kreirali novi akt!";
+                        $scope.message = "Novi akt je kreiran.";
+                        $scope.act = null;
                         $location.path("/new_act");
                 });
 

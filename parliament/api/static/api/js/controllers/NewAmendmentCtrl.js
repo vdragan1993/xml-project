@@ -22,7 +22,8 @@
                         data: { 'amendment' : $scope.amendment }
                     }).then(function success(response) {
                         console.log("poslala sam paramete amandmana");
-                        $scope.message = "Uspješno ste kreirali novi amandman na akt "+ data + "!";
+                        $scope.message = "Novi amandman na akt "+ data + " je kreiran.";
+                        $scope.amendment = null;
                         $location.path("/new_amendment");
                 });
 		        };

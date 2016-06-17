@@ -24,7 +24,8 @@
                 console.log($scope.conference);
                 var zbir = $scope.conference.against + $scope.conference.abstained;
                 if ($scope.conference.for < zbir) {
-                    $scope.message2 = "Ne može se kreirati sjednica!"
+                    $scope.message2 = "Kreiranje nove sjednice nije uspjelo."
+                    $scope.message = "";
                     $location.path("/new_conference");
                 }
                 else {
@@ -41,7 +42,8 @@
                 }).then(function success(response) {
                     console.log($scope.conference);
                     $scope.message2 = "";
-                    $scope.message = "Uspješno kreirana nova sjednica!";
+                    $scope.message = "Nova sjednica je kreirana.";
+                    $scope.conference = null;
                     $location.path("/new_conference");
                 });
             }

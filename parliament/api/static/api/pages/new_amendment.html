@@ -1,7 +1,9 @@
 <div class="container wider">
     <div class="page-header">
        <h2>Kreirajte novi amandman na akt [[act.name]]:</h2>
-        <p style="color: darkgreen">[[message]]</p>
+        <div class="alert alert-success" ng-if="message!=''">
+            <strong>Uspjeh!</strong> [[message]]
+        </div>
     </div>
 
   <div class="cover-container pull-left" style=" max-width: 45%; width: 45%">
