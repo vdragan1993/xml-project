@@ -5,9 +5,9 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer
-from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf, validate_document, read_metadata, set_metadata, get_proponent_for_user, insert_proponent, delete_proponent
-from .database import get_document_from_uri, text_search, advanced_search_list, insert_document_from_string, delete_document_from_uri
-
+from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf, validate_document, read_metadata, set_metadata, get_proponent_for_user, insert_proponent, delete_proponent, get_all_proponents, read_metadata_from_file, extract_parent_act, set_metadata_to_file, write_conference
+from .database import get_document_from_uri, text_search, advanced_search_list, insert_document_from_string, delete_document_from_uri, accept_amendment_uri, insert_document_from_file
+import time
 
 
 def index(request):
@@ -137,12 +137,52 @@ def create_conference(request):
             predsednik = data['president']
         if 'received' in data:
             usvojeni = data['received']
-        list = []
-        list.append({'president': predsednik, 'for': za, 'against': protiv, 'abstained': uzdrzani, 'received': usvojeni})
-        for i in list:
-            print(i)
-        #return lista
-        return JsonResponse(list, safe=False)
+        datum_sednice = time.strftime("%Y-%m-%d")
+
+        akti = []
+        amandmani = []
+        for uri in usvojeni:
+            name, collection, doc_type, status = uri_reader(uri)
+            if doc_type == 'akt':
+                akti.append(uri)
+            else:
+                amandmani.append(uri)
+
+        # usvajam prvo amandmane
+        for amandman in amandmani:
+            amandman_path = get_document_from_uri(amandman)
+            amandman_uri = read_metadata_from_file(amandman_path, 'uri')
+            parent_act = extract_parent_act(amandman_uri)
+            # usvajam amandman
+            accept_amendment_uri(amandman, parent_act)
+            # brisem ga
+            insert_document_from_file(amandman_path, 'usvojeniamandmani')
+            delete_proponent(amandman)
+            delete_document_from_uri(amandman)
+
+        # usvajam akte
+        for akt in akti:
+            akt_path = get_document_from_uri(akt)
+            #set_metadata_to_file(akt_path, 'status', 'usvojen')
+            insert_document_from_file(akt_path, 'usvojeniakti')
+            delete_proponent(akt)
+            delete_document_from_uri(akt)
+
+        #print(len(usvojeni))
+        #string_to_write = predsednik+","+datum_sednice+","+za+","+protiv+","+uzdrzani+","+len(usvojeni)+"\n"
+        #print(string_to_write)
+        #write_conference(string_to_write)
+        all_uris = get_all_proponents()
+        for prop_uri in all_uris:
+            delete_document_from_uri(prop_uri)
+
+        f = open('api/data/proponent.txt', 'w')
+        f.write('')
+        f.close()
+
+        ret_val = []
+        ret_val.append({'message': 'Nema rezultata'})
+        return JsonResponse(ret_val, safe=False)
 
 
 @csrf_exempt
@@ -173,7 +213,9 @@ def create_act(request):
             sadrzaj = data['content'].encode('utf-8')
 
 
-        predlagac_akta = read_metadata(sadrzaj, 'predlagac')
+        predlagac_akta = 'dragan'
+        #predlagac_akta = read_metadata(sadrzaj.decode('utf-8'), 'predlagac')
+        #sadrzaj = sadrzaj.decode('utf-8')
 
         if validate_document(sadrzaj, 'act'):
             insert_document_from_string(naslov, 'procesakti', sadrzaj)
@@ -259,5 +301,17 @@ def load_documents_for_user(request):
         for uri in uris:
             name, collection, doc_type, status = uri_reader(uri)
             ret_val.append({'uri': uri, 'name': name, 'type': doc_type, 'proces': status, 'proponent': username})
+
+        return JsonResponse(ret_val, safe=False)
+
+
+@csrf_exempt
+def load_process_documents(request):
+    if request.method == 'GET':
+        uris = get_all_proponents()
+        ret_val = []
+        for uri in uris:
+            name, collection, doc_type, status = uri_reader(uri)
+            ret_val.append({'uri': uri, 'name': name, 'type': doc_type, 'proces': status})
 
         return JsonResponse(ret_val, safe=False)

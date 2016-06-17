@@ -17,6 +17,7 @@ urlpatterns = [
     url(r'^html/$', views.aktHtml, name='html'),
     url(r'^svi/$', views.get_all, name='svi'),
     url(r'^discard/$', views.discard_document, name='discard'),
-    url(r'^load/$', views.load_documents_for_user, name='load')
+    url(r'^load/$', views.load_documents_for_user, name='load'),
+    url(r'^process/$', views.load_process_documents, name='process'),
 
 ]

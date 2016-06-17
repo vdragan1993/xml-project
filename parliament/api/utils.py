@@ -268,11 +268,34 @@ def read_metadata(string, metadata):
     Reads attribute value from given string
     :param string: xml doc
     :param metadata: attribute
-    :return:
+    :return: metadata value
     """
     content = io.StringIO(string)
     dom = etree.parse(content)
     return dom.xpath("/*/@" + metadata)[0]
+
+
+def read_metadata_from_file(file_path, metadata):
+    """
+    Reads attribute value from given file
+    :param file_path: xml doc path
+    :param metadata: attribute
+    :return: metadata value
+    """
+    file = open(file_path, 'rb')
+    file_data = file.read().decode("utf8")
+    return read_metadata(file_data, metadata)
+
+
+def set_metadata_to_file(file_path, metadata, value):
+    """
+    Sets attribute value from given file
+    :param file_path: xml doc path
+    :param metada: attribute
+    """
+    file = open(file_path, 'rb')
+    file_data = file.read().decode("utf8")
+    return set_metadata(file_data, metadata, value)
 
 
 def set_metadata(string, metadata, value):
@@ -308,6 +331,21 @@ def get_proponent_for_user(username):
     return ret_val
 
 
+def get_all_proponents():
+    """
+    List all not accepted docs
+    :return: list of uris
+    """
+    f = open("api/data/proponent.txt", "r")
+    lines = f.readlines()
+    f.close()
+    ret_val = []
+    for line in lines:
+        this_uri = line.split(",")[0]
+        ret_val.append(this_uri)
+    return ret_val
+
+
 def insert_proponent(uri, username):
     """
     For every inserted act or amendment, inserts into proponent statistics
@@ -339,4 +377,25 @@ def delete_proponent(uri):
             new_lines.append(line)
     f = open("api/data/proponent.txt", "w")
     f.writelines(new_lines)
+    f.close()
+
+
+def extract_parent_act(uri):
+    """
+    Extracts parent act uri
+    :param uri: given uri
+    :return: uri
+    """
+    parts = uri.split("?uri=")[1]
+    parts = parts[1:]
+    return parts.split('&')[0]
+
+
+def write_conference(string):
+    """
+    Writes conference data to file
+    :param string: conference data
+    """
+    f = open('api/data/conference.txt', "a")
+    f.write(string)
     f.close()

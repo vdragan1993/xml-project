@@ -13,10 +13,18 @@
                 $location.path("/new_conference");
             }
 
+            $http({
+                        method: 'GET',
+                        url: '/api/process/'
+                    }).then(function success(response) {
+                        $scope.imaginary = response.data;
+                });
+
+            /*
             $scope.imaginary=[{uri:"stagod",name:"kakosezove", type:"Akt", proces:"Usvojen"},
                     {uri:"stagod2",name:"kakosezove2", type:"Akt", proces:"U procesu"},
                     {uri:"stagod3",name:"kakosezove3", type:"Akt", proces:"Usvojen"}];
-
+            */
 
             $scope.createConference = function () {
                 $scope.conference.president = $rootScope.user.username;

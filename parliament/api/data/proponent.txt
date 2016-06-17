@@ -1,2 +1,0 @@
-procesamandmani/Dodatak.xml,marko
-procesamandmani/Izmena.xml,dragan

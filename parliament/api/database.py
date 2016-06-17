@@ -305,5 +305,5 @@ def accept_amendment_uri(amendment_uri, act_uri):
     amendment = get_document_from_uri(amendment_uri)
     act = get_document_from_uri(act_uri)
     accept_amendment(amendment, act, act_uri)
-    utils.remove_existing_file(amendment)
-    utils.remove_existing_file(act)
+    #utils.remove_existing_file(amendment)
+    #utils.remove_existing_file(act)
