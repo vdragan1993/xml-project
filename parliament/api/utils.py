@@ -289,3 +289,54 @@ def set_metadata(string, metadata, value):
     root_tag.set(metadata, value)
     new_content = etree.tostring(dom, pretty_print=True)
     return new_content.decode("utf-8")
+
+
+def get_proponent_for_user(username):
+    """
+    For every given username, returns proponent uri
+    :param username: given username
+    :return: list of uris
+    """
+    f = open("api/data/proponent.txt", "r")
+    lines = f.readlines()
+    f.close()
+    ret_val = []
+    for line in lines:
+        line = line[:-1]
+        if line.split(',')[1] == username:
+            ret_val.append(line.split(',')[0])
+    return ret_val
+
+
+def insert_proponent(uri, username):
+    """
+    For every inserted act or amendment, inserts into proponent statistics
+    :param uri: doc uri
+    :param username: given username
+    """
+    f = open("api/data/proponent.txt", "r")
+    lines = f.readlines()
+    f.close()
+    new_line = uri + "," + username + "\n"
+    lines.append(new_line)
+    f = open("api/data/proponent.txt", "w")
+    f.writelines(lines)
+    f.close()
+
+
+def delete_proponent(uri):
+    """
+    Deletes uri from proponent statistics
+    :param uri: doc uri
+    """
+    f = open("api/data/proponent.txt", "r")
+    lines = f.readlines()
+    f.close()
+    new_lines = []
+    for line in lines:
+        this_uri = line.split(",")[0]
+        if this_uri != uri:
+            new_lines.append(line)
+    f = open("api/data/proponent.txt", "w")
+    f.writelines(new_lines)
+    f.close()

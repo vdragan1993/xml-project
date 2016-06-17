@@ -5,8 +5,8 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer
-from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf, validate_document, read_metadata, set_metadata
-from .database import get_document_from_uri, text_search, advanced_search_list, insert_document_from_string
+from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf, validate_document, read_metadata, set_metadata, get_proponent_for_user, insert_proponent, delete_proponent
+from .database import get_document_from_uri, text_search, advanced_search_list, insert_document_from_string, delete_document_from_uri
 
 
 
@@ -182,6 +182,7 @@ def create_act(request):
             message = 'No'
 
         # dodaj u listu za istoriju
+        insert_proponent('procesakti/'+naslov, predlagac_akta)
 
         list = []
         list.append({'message': message})
@@ -214,6 +215,7 @@ def create_amendment(request):
 
 
         # dodaj u listu dodatih
+        insert_proponent('procesamandmani/'+naslov, predlagac_amandmana)
 
         list = []
         list.append({'message': message})
@@ -231,3 +233,31 @@ def get_all(request):
         name, collection, doc_type, status = uri_reader(line)
         ret_val.append({'uri': line, 'name': name, 'type': doc_type, 'proces': status})
     return JsonResponse(ret_val, safe=False)
+
+
+@csrf_exempt
+def discard_document(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        target_uri = data['uri']
+        # brisemo iz proponent.txt
+        delete_proponent(target_uri)
+        # brisemo konacno iz baze
+        delete_document_from_uri(target_uri)
+        ret_val = []
+        ret_val.append({'message': 'Nema rezultata'})
+        return JsonResponse(ret_val, safe=False)
+
+
+@csrf_exempt
+def load_documents_for_user(request):
+    if request.method == 'POST':
+        data = JSONParser().parse(request)
+        username = data['username']
+        uris = get_proponent_for_user(username)
+        ret_val = []
+        for uri in uris:
+            name, collection, doc_type, status = uri_reader(uri)
+            ret_val.append({'uri': uri, 'name': name, 'type': doc_type, 'proces': status, 'proponent': username})
+
+        return JsonResponse(ret_val, safe=False)

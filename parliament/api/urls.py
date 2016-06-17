@@ -15,6 +15,8 @@ urlpatterns = [
     url(r'^pdf/$', views.aktPdf, name='pdf'), #ako treba regex za ovo uri stavite
     url(r'^xml/$', views.aktXml, name='xml'),
     url(r'^html/$', views.aktHtml, name='html'),
-    url(r'^svi/$', views.get_all, name='svi')
+    url(r'^svi/$', views.get_all, name='svi'),
+    url(r'^discard/$', views.discard_document, name='discard'),
+    url(r'^load/$', views.load_documents_for_user, name='load')
 
 ]
