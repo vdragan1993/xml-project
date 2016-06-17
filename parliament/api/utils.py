@@ -261,3 +261,31 @@ def contains_metadata(file_path, metadata, value):
         return real_value[0] == value
     else:
         return False
+
+
+def read_metadata(string, metadata):
+    """
+    Reads attribute value from given string
+    :param string: xml doc
+    :param metadata: attribute
+    :return:
+    """
+    content = io.StringIO(string)
+    dom = etree.parse(content)
+    return dom.xpath("/*/@" + metadata)[0]
+
+
+def set_metadata(string, metadata, value):
+    """
+    Sets attribute value from given value
+    :param string: xml doc
+    :param metadata: attribute
+    :param value: new attribute value
+    :return: new xml doc
+    """
+    content = io.StringIO(string)
+    dom = etree.parse(content)
+    root_tag = dom.xpath('//b:amandman', namespaces={'b': 'https://ftn.uns.ac.rs/xml'})[0]
+    root_tag.set(metadata, value)
+    new_content = etree.tostring(dom, pretty_print=True)
+    return new_content.decode("utf-8")

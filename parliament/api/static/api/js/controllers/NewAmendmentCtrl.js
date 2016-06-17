@@ -11,6 +11,9 @@
             if($rootScope.user){
                 $location.path("/new_amendment");
             }
+            if($rootScope.act){
+                $scope.act = $rootScope.act;
+            }
 
             $scope.createAmendment = function (data) {
                 console.log("pozvna funkcija za kreiranje amandmana!");

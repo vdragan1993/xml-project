@@ -5,8 +5,8 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer
-from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf
-from .database import get_document_from_uri, text_search, advanced_search_list
+from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf, validate_document, read_metadata, set_metadata
+from .database import get_document_from_uri, text_search, advanced_search_list, insert_document_from_string
 
 
 
@@ -165,23 +165,32 @@ def simple_search(request):
 @csrf_exempt
 def create_act(request):
     if request.method == 'POST':
-        print("pozvao view create act")
         data = JSONParser().parse(request)
         data = data['act']
         if 'title' in data:
             naslov = data['title']
         if 'content' in data:
-            sadrzaj = data['content']
+            sadrzaj = data['content'].encode('utf-8')
+
+
+        predlagac_akta = read_metadata(sadrzaj, 'predlagac')
+
+        if validate_document(sadrzaj, 'act'):
+            insert_document_from_string(naslov, 'procesakti', sadrzaj)
+            message = 'Ok'
+        else:
+            message = 'No'
+
+        # dodaj u listu za istoriju
+
         list = []
-        list.append({'title': naslov, 'content': sadrzaj})
-        print(list)
+        list.append({'message': message})
         return JsonResponse(list, safe=False)
 
 
 @csrf_exempt
 def create_amendment(request):
     if request.method == 'POST':
-        print("pozvao view create amandman")
         data = JSONParser().parse(request)
         data = data['amendment']
         if 'title' in data:
@@ -190,9 +199,24 @@ def create_amendment(request):
             sadrzaj = data['content']
         if 'act' in data:
             akt = data['act']
+
+        predlagac_amandmana = read_metadata(sadrzaj, 'predlagac')
+
+        #kratak_uri = 'procesamandmani/' + naslov
+        novi_uri = "http://147.91.177.194:8000/v1/documents?uri=/"+ akt +"&database=Tim20"
+        sadrzaj = set_metadata(sadrzaj, 'uri', novi_uri)
+
+        if validate_document(sadrzaj, 'amendment'):
+            insert_document_from_string(naslov, 'procesamandmani', sadrzaj)
+            message = 'Ok'
+        else:
+            message = 'No'
+
+
+        # dodaj u listu dodatih
+
         list = []
-        list.append({'title': naslov, 'content': sadrzaj, 'act': akt})
-        print(list)
+        list.append({'message': message})
         return JsonResponse(list, safe=False)
 
 

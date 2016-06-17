@@ -17,7 +17,6 @@
                            margin-bottom: 3%;}
                     img { height: 100; width: 100; }
                     h1 {text-transform: uppercase;}
-                    h3 {text-transform: capitalize;}
                     p#clan { text-align: justify; margin-left:20%; margin-right:20%; display:block;
                             border: 1px solid; padding: 1%;}
                     p#obrazlozenje {text-align:justify; margin-left:20%; margin-right:20%; display:block;}
@@ -28,7 +27,7 @@
             <body>   
                 <h1>Amandman</h1>
                 <br />
-                <h3>za Akt &#160;<a href="{actionUrl}"><xsl:value-of select="/*/@uri"/></a></h3>
+                <h3>za Akt &#160;<a href="{/*/@uri}" target="_blank"><xsl:value-of select="/*/@uri"/></a></h3>
                 <br />
                 <br />
                 <h2><xsl:value-of select="/*/@operacija"/> za Član broj <xsl:value-of select="//a:clan/@rbr"/>. <i><xsl:value-of select="//a:clan[1]/@naslov"/></i></h2>

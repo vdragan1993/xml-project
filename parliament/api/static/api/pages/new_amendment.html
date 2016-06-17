@@ -1,13 +1,13 @@
 <div class="container wider">
     <div class="page-header">
-       <h2>Kreirajte novi amandman na akt [[act.name]]:</h2>
+       <h2>Kreirajte novi amandman na akt [[act]]:</h2>
         <div class="alert alert-success" ng-if="message!=''">
             <strong>Uspjeh!</strong> [[message]]
         </div>
     </div>
 
   <div class="cover-container pull-left" style=" max-width: 45%; width: 45%">
-            <form method="post" ng-submit="createAmendment(act.uri)">
+            <form method="post" ng-submit="createAmendment(act)">
               <table class="table table-responsive" style="max-width: 900px">
                   <thead>
                   <th colspan="2" class="text-center">Unesite podatke:</th>

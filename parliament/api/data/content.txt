@@ -2,3 +2,5 @@ usvojeniakti/Poslovnik.xml
 usvojeniakti/Pravilnik_javne_nabavke.xml
 procesamandmani/Dodatak.xml
 procesakti/Odluka.xml
+procesakti/novaodluka.xml
+procesamandmani/Izmena.xml
