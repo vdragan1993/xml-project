@@ -9,12 +9,13 @@
     <div class="cover-container" >
         <table class="table table-bordered" style="max-width: 700px">
             <thead>
-                <th>Rbr.</th>
+                <th style="max-width: 5px">Rbr.</th>
                 <th>Predsednik</th>
                 <th>Datum održavanja</th>
                 <th style="max-width: 30px">Za</th>
                 <th style="max-width: 30px">Protiv</th>
-                <th style="max-width: 30px">Uzdržani</th>
+                <th style="max-width: 40px">Uzdržani</th>
+                <th style="max-width: 40px">Usvojeno</th>
             </thead>
             <tbody>
                 <tr ng-repeat="c in conferences">
@@ -24,7 +25,7 @@
                     <td>[[c.for]]</td>
                     <td>[[c.against]]</td>
                     <td>[[c.abstained]]</td>
-
+                    <td>[[c.received.length]]</td>
                 </tr>
             </tbody>
         </table>

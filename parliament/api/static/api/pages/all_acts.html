@@ -4,24 +4,24 @@
        <h2 ng-click = "trazi=true;napredna=false;show=false;" class="click">Pretražite akte</h2>
     </div>
     <div class="page-header" style="float: left; width: 77%;padding-left: 10px;">
-       <h2 class="click" ng-click = "trazi=false;napredna=true;show=false;">Napredna pretraga</h2>
+       <h2 class="click" ng-click = "trazi=false;napredna=true;show=false;noresults=false;">Napredna pretraga</h2>
     </div>
     </div>
 <div class="container wider" ng-show="trazi">
     <div class="cover-container" >
 
         <form ng-submit="sSearch()">
-            <input type="text" class="form-control pull-left" style="width: 50%" ng-model="ssearch.text" >
+            <input type="text" class="form-control pull-left" style="width: 50%" ng-model="ssearch" >
             <button type="submit" class="button btn-primary btn-block btn-sm pull-left" style="width: 10%; height: 35px;"> Traži</button>
         </form>
-        <button type="button" ng-click="show=!show;" class="button btn-success btn-block btn-sm pull-right" style="width: 20%; height: 35px;margin-right: 10%;"> Prikaži sve</button>
+        <button type="button" ng-click="show=!show; noresults=false" class="button btn-success btn-block btn-sm pull-right" style="width: 20%; height: 35px;margin-right: 10%;"> Prikaži sve</button>
 <br><br>.
     </div>
 </div>
 <div class="container wider" ng-show="napredna">
     <div class="cover-container" >
 
-        <form ng-submit="sNapredna()">
+        <form ng-submit="aSearch()">
             <table width="100%">
                 <tr>
                     <td>Naslov</td>
@@ -74,8 +74,15 @@
                     <td align="center" style="width: 200px;"><input type="number" class="form-control" style="width: 90px;float:left;" ng-model="akt.uzdrzani_od"> - <input type="number" class="form-control" style="width: 90px;float:right;" ng-model="akt.uzdrzani_do"></td>
                 </tr>
             </table>
-<br>
-            <input ng-click="show=true;" type="submit" class="button btn-primary btn-block btn-sm pull-left" style="width: 10%; height: 35px;" value = "Pretraži" >
+                <br>
+            <select class="form-control pull-left" style="width:100px; height: 30px;" ng-model="akt.operator">
+                <option selected>AND</option>
+                <option>OR</option>
+            </select>
+
+
+
+            <input ng-click="show=true; noresults=false" type="submit" class="button btn-primary btn-block btn-sm" style="width: 10%; height: 35px;" value = "Pretraži" >
         </form>
 <br><br>
     </div>
@@ -104,7 +111,7 @@
                     <td><button type="button" class="btn btn-danger center-block" ng-click="downloadPDF('pdf'+i.uri)">PDF</button></td>
                     <td><button type="button" class="btn btn-info center-block" ng-click="downloadPDF('html'+i.uri)"> HTML</button></td>
                     <td>
-                        <button type="button" class="btn btn-default center-block" ng-click="addAmandmen(i.uri)" ng-if="user.is_superuser==false && user.is_staff && i.proces=='Usvojen'"> Predloži amandman</button>
+                        <button type="button" class="btn btn-default center-block" ng-click="addAmandmen(i.uri)" ng-if="user.is_staff && i.proces!='Usvojen'"> Predloži amandman</button>
                         <p ng-if="user.is_superuser==false && user.is_staff==false">[[i.proces]]</p>
                     </td>
                 </tr>
@@ -113,4 +120,13 @@
     </div>
 </div>
 
+
+<div class="container wider" style="background: #F5F5F5;" ng-show="noresults">
+    <div class="page-header">
+       <h2>Rezultati pretrage:</h2>
+    </div>
+    <div class="cover-container" >
+        Nema rezultata koji zadovoljavaju kriterijume pretrage!
+    </div>
+</div>
 

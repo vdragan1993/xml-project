@@ -1,10 +1,11 @@
 <div class="container wider">
     <div class="page-header">
-       <h2>Kreirajte novi amandman na akt [[amendment.name]]:</h2>
+       <h2>Kreirajte novi amandman na akt [[act.name]]:</h2>
+        <p style="color: darkgreen">[[message]]</p>
     </div>
 
   <div class="cover-container pull-left" style=" max-width: 45%; width: 45%">
-            <form method="post" ng-submit="createAmendment(amendment)">
+            <form method="post" ng-submit="createAmendment(act.uri)">
               <table class="table table-responsive" style="max-width: 900px">
                   <thead>
                   <th colspan="2" class="text-center">Unesite podatke:</th>
@@ -12,11 +13,11 @@
                   <tbody>
                   <tr>
                       <th>Naslov:</th>
-                      <td> <input type="text" name="za" ng-model="act.title"  required style="width: 100%"></td>
+                      <td> <input type="text" name="za" ng-model="amendment.title"  required style="width: 100%"></td>
                   </tr>
                   <tr>
                       <th>Sadržaj:</th>
-                      <td><textarea name="content" cols="40" rows="8" ng-model="act.content" required style="width: 100%"></textarea></td>
+                      <td><textarea name="content" cols="40" rows="8" ng-model="amendment.content" required style="width: 100%"></textarea></td>
                   </tr>
                   <tr>
                       <td colspan="2"> <button type="submit" class="button btn-lg btn-success center-block" style="width: 250px"> Kreiraj </button></td>

@@ -27,7 +27,6 @@
     <!-- Angular Controllers -->
     <script type="text/javascript" src="{% static 'api/js/controllers/LoginCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/LogoutCtrl.js' %}"></script>
-    <script type="text/javascript" src="{% static 'api/js/controllers/HomeCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/HomePresidentCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/HomeAldermanCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/HomeCitizenCtrl.js' %}"></script>
@@ -63,7 +62,7 @@
               <li><a href="/citizen" ng-if="user.is_superuser==false && user.is_staff==false"> Početna</a></li>
               <li><a href="/all_acts" ng-if="user.is_superuser==false && user.is_staff==false"> Akti</a></li>
 
-                <li class="dropdown" ng-if="user.is_superuser==false && user.is_staff">
+                <li class="dropdown" ng-if="user.is_staff">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Akti <span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="/all_acts">Svi akti</a></li>
@@ -79,7 +78,7 @@
                          <li><a href="/new_conference">Nova sjednica</a></li>
                     </ul>
                 </li>
-              <li><a href="/history" ng-if="user.is_staff || user.is_superuser"> Istorija</a></li>
+              <li><a href="/history" ng-if="user.is_staff"> Istorija</a></li>
 
               <li ng-controller="LogoutCtrl"><a href="" title="Odjavi se" ng-click="logout()">Odjavi se</a></li>
             </ul>

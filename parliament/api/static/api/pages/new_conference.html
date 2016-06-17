@@ -23,9 +23,11 @@
                   </tr>
 
                   <tr>
-                      <th>Lista akata:</th>
-                      <td> Ovdje ce biti akt 1 <br>
-                            Ovdje ce biti akt 2 <br>
+                      <th>Lista akata i amandmana:</th>
+                      <td>
+                          <p ng-repeat="i in imaginary">
+                              [[i.name]] <input type="checkbox" ng-model="i.selected" value=[[i.uri]] />
+                          </p>
                       </td>
                   </tr>
 

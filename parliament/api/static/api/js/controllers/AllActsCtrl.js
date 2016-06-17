@@ -11,7 +11,7 @@
             $scope.show = false;
             $scope.trazi = true;
             $scope.napredna = false;
-
+            $scope.noresults = false;
 
             $scope.imaginary=[{uri:"stagod",name:"kakosezove", type:"Akt", proces:"Usvojen"},
                     {uri:"stagod2",name:"kakosezove2", type:"Akt", proces:"U procesu"},
@@ -19,8 +19,23 @@
 
 
            $scope.sSearch = function () {
-                console.log("pozvana funkcija za pretragu!");
-                $scope.show=true;
+                console.log("pozvana funkcija za prostu pretragu!");
+               if ($scope.ssearch!=undefined) {
+                   console.log($scope.ssearch);
+                   var pretraga = $scope.ssearch;
+                   $http({
+                        method: 'POST',
+                        url: '/api/simple_search/',
+                        data: { 'ssearch' : $scope.ssearch }
+                    }).then(function success(response) {
+                        console.log("poslala sam parametar pretrage");
+                });
+
+               }
+               else {
+                   console.log("niste nista uneli");
+                   $scope.noresults = true;
+               }
 		   };
 
             $scope.downloadPDF = function (data) {
@@ -49,7 +64,7 @@
                 });
 		   };
 
-            $scope.sNapredna= function () {
+            $scope.aSearch= function () {
                 console.log("pozvana funkcija za naprednu pretragu!",$scope.akt);
                 $http({
                         method: 'POST',
@@ -63,7 +78,7 @@
 
             $scope.addAmandmen = function (data) {
                 console.log("pozvana funkcija za amandman", data);
-                $rootScope.amendment_uri = data;
+                $rootScope.act = data;
                 $location.path("/new_amendment");
 		   };
 

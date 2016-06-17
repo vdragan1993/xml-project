@@ -7,7 +7,7 @@
                 $location.path("/home");
             }
             else{
-                $scope.message = 'Angular message example';
+                $scope.message = '';
                 $scope.user={};
                 console.log($scope.user);
                 $scope.login = function () {
