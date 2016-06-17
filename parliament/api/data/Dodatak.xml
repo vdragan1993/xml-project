@@ -5,7 +5,7 @@
  xsi:schemaLocation="https://ftn.uns.ac.rs/xml file:/C:/Users/MarkoIvetic/Desktop/xml/XML_Proj_schema_amandman.xsd" 
  datum="2006-05-04" uri="file:/C:/Users/MarkoIvetic/Desktop/xml/Odluka.xml" clanId="4" 
  operacija="Dodatak" predlagac="Pera Peric">
-    <projAm:opis>Dodatak za odluku</projAm:opis>
+    <projAm:opis>Dodatak na Odluku</projAm:opis>
     <proj:clan rbr="4" naslov="">
         <proj:stav>
             <tekst>
@@ -17,5 +17,5 @@
             </tekst>
         </proj:stav>
     </proj:clan>
-    <projAm:obrazlozenje>Bla bla</projAm:obrazlozenje>
+    <projAm:obrazlozenje>Potrebno je definisati aktivnosti u slučaju poreznih obaveza. Koristiti definisan koeficijent.</projAm:obrazlozenje>
 </projAm:amandman>

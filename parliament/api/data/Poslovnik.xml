@@ -42,16 +42,16 @@
             <proj:clan rbr="Član 4" naslov="Sazivanje konstitutavine sednice">
                 <proj:stav>
                     <tekst>
-                        <blok>Konstitutivnu sednicu Skupštine saziva predsed-nik Skupštine iz prethodnog saziva, u roku od 15 dana od dana objavljivanja rezultata izbora.</blok>
-                        <blok>Do izbora predsednika Skupštine, konstitutivnu sednicu Skupštine otvara i njome predsedava najsta-riji prisutan odbornik (predsedavajući) koji je ovla-šćen i da sazove konstitutivnu sednicu ako to u zakons-kom roku ne učini predsednik Skupštine iz prethodnog saziva.</blok>
+                        <blok>Konstitutivnu sednicu Skupštine saziva predsed-nik Skupštine iz prethodnog saziva, u roku od 15 dana od dana objavljivanja rezultata izbora.
+                        Do izbora predsednika Skupštine, konstitutivnu sednicu Skupštine otvara i njome predsedava najsta-riji prisutan odbornik (predsedavajući) koji je ovla-šćen i da sazove konstitutivnu sednicu ako to u zakons-kom roku ne učini predsednik Skupštine iz prethodnog saziva.</blok>
                     </tekst>
                 </proj:stav>
             </proj:clan>
             <proj:clan rbr="Član 7" naslov="Potvrđivanje madata">
                 <proj:stav>
                     <tekst>
-                        <blok>Odbornici stiču prava i dužnosti odbornika Skup-štine danom potvrđivanja mandata.</blok>
-                        <blok>Potvrđivanje mandata odbornika vrši se na osnovu uverenja o izboru odbornika i izveštaja Verifikaci-onog odbora (u daljem tekstu: Odbor). Danom potvrđi-vanja mandata većine odbornika prestaje mandat od-bornika prethodnog saziva Skupštine.</blok>
+                        <blok>Odbornici stiču prava i dužnosti odbornika Skup-štine danom potvrđivanja mandata.
+                        Potvrđivanje mandata odbornika vrši se na osnovu uverenja o izboru odbornika i izveštaja Verifikaci-onog odbora (u daljem tekstu: Odbor). Danom potvrđi-vanja mandata većine odbornika prestaje mandat od-bornika prethodnog saziva Skupštine.</blok>
                     </tekst>
                 </proj:stav>
             </proj:clan>
