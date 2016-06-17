@@ -27,7 +27,7 @@
                         url: '/api/discard/',
                         data : {'uri': mojUri}
                     }).then(function success(response) {
-                        $scope.message = "Uspješno brisanje amandmana!";
+                        $scope.message = "Akt je obrisan.";
                });
 
 		   };
@@ -41,7 +41,7 @@
                         url: '/api/discard/',
                         data : {'uri': mojUri}
                     }).then(function success(response) {
-                        $scope.message = "Uspješno brisanje akta!";
+                        $scope.message = "Amandman je obrisan.";
                });
             };
 

@@ -7,14 +7,15 @@
 
     angular.module('parliamentApp.NewAmendmentCtrl', [])
         .controller('NewAmendmentCtrl', function($rootScope, $scope, $location, $http){
-           //$scope.message = $rootScope.user.username;
+           $scope.message = "";
             if($rootScope.user){
                 $location.path("/new_amendment");
             }
             if($rootScope.act){
                 $scope.act = $rootScope.act;
             }
-
+            $scope.actname = $scope.act.split('/')[1];
+            $scope.actname = $scope.actname.split('.')[0];
             $scope.createAmendment = function (data) {
                 console.log("pozvna funkcija za kreiranje amandmana!");
                 console.log("amandman za akt ", data);

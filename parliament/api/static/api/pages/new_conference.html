@@ -10,7 +10,7 @@
     </div>
 
         <form method="post" ng-submit="createConference()">
-              <table class="table table-bordered center-block" style="max-width: 400px">
+              <table class="table table-responsive center-block" style="max-width: 600px">
                   <tr>
                       <th>Za:</th>
                       <td> <input type="number" min="0" class="pull-left" style="max-width: 100px" name="za" ng-model="conference.for" required=""></td>
@@ -27,7 +27,7 @@
                   </tr>
 
                   <tr>
-                      <th>Lista akata i amandmana:</th>
+                      <th>Lista akata i amandmana koji se usvajaju:</th>
                       <td>
                           <p ng-repeat="i in imaginary">
                               [[i.name]] <input type="checkbox" ng-model="i.selected" value=[[i.uri]] />

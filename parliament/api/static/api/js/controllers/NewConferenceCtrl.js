@@ -52,7 +52,8 @@
                     $scope.message2 = "";
                     $scope.message = "Nova sjednica je kreirana.";
                     $scope.conference = null;
-                    $location.path("/new_conference");
+
+                    $location.path("/all_conferences");
                 });
             }
 		        };
