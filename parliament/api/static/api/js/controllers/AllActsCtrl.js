@@ -13,10 +13,12 @@
             $scope.napredna = false;
             $scope.noresults = false;
 
+            /*
             $scope.imaginary=[{uri:"stagod",name:"kakosezove", type:"Akt", proces:"Usvojen"},
                     {uri:"stagod2",name:"kakosezove2", type:"Akt", proces:"U procesu"},
                     {uri:"stagod3",name:"kakosezove3", type:"Akt", proces:"Usvojen"}];
-
+            */
+            $scope.imaginary = [];
 
            $scope.sSearch = function () {
                 console.log("pozvana funkcija za prostu pretragu!");
@@ -42,26 +44,40 @@
                 if(data.indexOf('pdf') == 0)
                 {
                     $http({
-                        method: 'GET',
-                        url: '/api/'+data.slice(3)+'/pdf/' //odsjekla sam pdf sa pocetka urija
+                        method: 'POST',
+                        url: '/api/pdf/', //odsjekla sam pdf sa pocetka urija
+                        data : {'uri':data.slice(3)},
+                        responseType: 'arraybuffer'
                     }).then(function success(response) {
-                        console.log("sta dalje?")
+                        var blob = new Blob([response.data], {type:"application/pdf"});
+                        var objectUrl = URL.createObjectURL(blob);
+                        window.open(objectUrl);
                 });
                 }
-                else if(data.indexOf('xml') == 0)
+                else if(data.indexOf('xml') == 0){
+                console.log(data.slice(3));
                 $http({
-                        method: 'GET',
-                        url: '/api/'+data.slice(3)+'/xml/'
+                        method: 'POST',
+                        url: '/api/xml/',
+                        data : {'uri':data.slice(3)},
+                        responseType: 'arraybuffer'
                     }).then(function success(response) {
-                        console.log("sta dalje?")
-                });
-                else if(data.indexOf('html') == 0)
-                $http({
-                        method: 'GET',
-                        url: '/api/'+data.slice(4)+'/html/'
+                        var blob = new Blob([response.data], {type:"application/xml"});
+                        var objectUrl = URL.createObjectURL(blob);
+                        window.open(objectUrl);
+                });}
+                else if(data.indexOf('html') == 0) {
+                    $http({
+                        method: 'POST',
+                        url: '/api/html/',
+                        data: {'uri' : data.slice(4)},
+                        responseType: 'arraybuffer'
                     }).then(function success(response) {
-                        console.log("sta dalje?")
-                });
+                        var blob = new Blob([response.data], {type:"text/html"});
+                        var objectUrl = URL.createObjectURL(blob);
+                        window.open(objectUrl);
+                    });
+                }
 		   };
 
             $scope.aSearch= function () {
@@ -81,6 +97,16 @@
                 $rootScope.act = data;
                 $location.path("/new_amendment");
 		   };
+
+            $scope.prikaziSve= function(){
+                $http({
+                    method:"GET",
+                    url:"/api/svi/"
+                }).then(function success(response){
+                    $scope.imaginary= response.data;
+                   $scope.show= true;
+                });
+            };
 
         });
 }(angular));

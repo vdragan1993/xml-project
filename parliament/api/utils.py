@@ -3,12 +3,11 @@ from lxml.etree import XMLSyntaxError
 import os
 from xhtml2pdf import pisa
 import io
-from api.database import get_document_from_uri, update_document_from_string_uri
 
 
 # location of xsd
-xsd_act = 'schema/XML_Proj_schema_act.xsd'
-xsd_amendment = 'schema/XML_Proj_schema_amandman.xsd'
+xsd_act = 'api/schema/XML_Proj_schema_act.xsd'
+xsd_amendment = 'api/schema/XML_Proj_schema_amandman.xsd'
 
 
 def validate_document(xml_doc_string, doc_type='amendment'):
@@ -58,10 +57,10 @@ def remove_existing_file(path):
         pass
 
 
-xsl_amendment_html = 'transformations/amendment.xsl'
-xsl_amendment_pdf = 'transformations/amendment_pdf.xsl'
-xsl_act_html = 'transformations/Akt.xsl'
-xsl_act_pdf = 'transformations/Akt_pdf.xsl'
+xsl_amendment_html = 'api/transformations/amendment.xsl'
+xsl_amendment_pdf = 'api/transformations/amendment_pdf.xsl'
+xsl_act_html = 'api/transformations/Akt.xsl'
+xsl_act_pdf = 'api/transformations/Akt_pdf.xsl'
 
 
 def transform_document_to_html(xml_file_path, doc_type='amendment'):
@@ -72,7 +71,7 @@ def transform_document_to_html(xml_file_path, doc_type='amendment'):
     :return: path to generated file
     """
     xml_file_name = get_file_name(xml_file_path)
-    destination_path = 'generate/html/' + xml_file_name + ".html"
+    destination_path = 'api/generate/html/' + xml_file_name + ".html"
     remove_existing_file(destination_path)
 
     xsl_file = xsl_amendment_html
@@ -107,7 +106,7 @@ def convert_xhtml_to_pdf(xhtml_string, destination_file, document_type='amendmen
     if document_type == 'act':
         css = None
 
-    pisa_status = pisa.CreatePDF(xhtml_string, dest=result_file, default_css=css)
+    pisa_status = pisa.CreatePDF(xhtml_string, dest=result_file, default_css=css, encoding='utf-8')
     result_file.close()
     print("File {0} generated successfully!".format(destination_file))
     return pisa_status.err
@@ -121,7 +120,7 @@ def transform_document_to_pdf(xml_file_path, doc_type='amendment'):
     :return: path to generated file
     """
     xml_file_name = get_file_name(xml_file_path)
-    destination_path = 'generate/pdf/' + xml_file_name + ".pdf"
+    destination_path = 'api/generate/pdf/' + xml_file_name + ".pdf"
     remove_existing_file(destination_path)
 
     xsl_file = xsl_amendment_pdf
@@ -143,7 +142,7 @@ def exists_in_content(doc_uri):
     :param doc_uri: document name and collection
     :return: True or False
     """
-    f = open("data/content.txt", "r")
+    f = open("api/data/content.txt", "r")
     lines = f.readlines()
     f.close()
     for line in lines:
@@ -158,7 +157,7 @@ def write_to_content(doc_uri):
     Add document uri in list of existing documents in database
     :param doc_uri: document name and collection
     """
-    f = open("data/content.txt", "a")
+    f = open("api/data/content.txt", "a")
     line = doc_uri + "\n"
     f.write(line)
     f.close()
@@ -169,11 +168,11 @@ def delete_from_content(doc_uri):
     Remove document uri from list of existing documents in database
     :param doc_uri: document name and collection
     """
-    f = open("data/content.txt", "r")
+    f = open("api/data/content.txt", "r")
     lines = f.readlines()
     f.close()
 
-    f = open("data/content.txt", "w")
+    f = open("api/data/content.txt", "w")
     for line in lines:
         line = line[:-1]
         if line != doc_uri:
@@ -194,71 +193,6 @@ def clean_xml_file(file_path):
     f = open(file_path, "w", encoding='utf8')
     f.writelines(lines)
     f.close()
-
-
-def accept_amendment(amendment_path, act_path, doc_uri):
-    """
-    Performs amendment operation on given act, and updates file in MarkLogic database.
-    :param amendment_path: amendment file path
-    :param act_path: act file path
-    :param doc_uri: act uri
-    """
-    # amendment operations
-    amendment_file = open(amendment_path, 'rb')
-    amendment_data = amendment_file.read().decode("utf8")
-    amendment_content = io.StringIO(amendment_data)
-    amendment_dom = etree.parse(amendment_content)
-    operation = amendment_dom.xpath('/*/@operacija')[0]
-    target_article = amendment_dom.xpath('/*/@clanId')[0]
-    # act operations
-    act_file = open(act_path, 'rb')
-    act_data = act_file.read().decode("utf8")
-    act_content = io.StringIO(act_data)
-    act_dom = etree.parse(act_content)
-    # get all articles
-    articles = act_dom.xpath('//b:clan/@rbr', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})
-    # iterate through given articles
-    for article in articles:
-        if article == target_article:
-            if operation == 'Dodatak':
-                last_article = act_dom.xpath("//b:clan[@rbr='" + article + "']", namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
-                new_article = amendment_dom.xpath('//b:clan', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
-                last_article.append(new_article)
-
-            elif operation == 'Izmena':
-                amendment_text = amendment_dom.xpath('//b:clan/b:stav/tekst/blok', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
-                target_text = act_dom.xpath("//b:clan[@rbr='" + article + "']/b:stav/tekst/blok", namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
-                target_text.text = ""
-                target_text.text = amendment_text.text
-
-            elif operation == 'Brisanje':
-                delete_article = act_dom.xpath("//b:clan[@rbr='" + article + "']", namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
-                delete_article.getparent().remove(delete_article)
-
-    # fix article numbers
-    new_articles_num = act_dom.xpath('//b:clan', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})
-    start = 1
-    for current_article in new_articles_num:
-        current_article.set('rbr', str(start))
-        start += 1
-    # return text
-    new_act = etree.tostring(act_dom, pretty_print=True)
-    new_act_string = new_act.decode("utf8")
-    update_document_from_string_uri(new_act_string, doc_uri)
-    print("Amendment acceptance successful!")
-
-
-def accept_amendment_uri(amendment_uri, act_uri):
-    """
-    Performs amentment operation on given act.
-    :param amendment_uri: amednment document uri
-    :param act_uri: act document uri
-    """
-    amendment = get_document_from_uri(amendment_uri)
-    act = get_document_from_uri(act_uri)
-    accept_amendment(amendment, act, act_uri)
-    remove_existing_file(amendment)
-    remove_existing_file(act)
 
 
 def parse_search_results(result):
@@ -298,7 +232,7 @@ def get_uries_from_content():
     Returns all act uries from database.
     :return: list of act uries
     """
-    f = open('data/content.txt', 'r')
+    f = open('api/data/content.txt', 'r')
     lines = f.readlines()
     f.close()
     ret_val = []

@@ -2,6 +2,8 @@ import parliament.settings as db
 import api.utils as utils
 import requests
 from requests.auth import HTTPDigestAuth
+import io
+from lxml import etree
 
 
 """
@@ -84,7 +86,7 @@ def get_document_from_uri(doc_uri):
     response = requests.get(url, headers=headers, auth=HTTPDigestAuth(db.DATABASE_USER, db.DATABASE_PASS))
     if 200 <= response.status_code < 300:
         print("File {0} successfully get from database!".format(doc_uri))
-        file_location = "download/" + utils.get_file_name(doc_uri) + ".xml"
+        file_location = "api/download/" + utils.get_file_name(doc_uri) + ".xml"
         f = open(file_location, "wb")
         f.write(response.content)
         f.close()
@@ -240,3 +242,68 @@ def advanced_search_list(attributes, values, operator):
                 total_results.append(k)
 
     return total_results
+
+
+def accept_amendment(amendment_path, act_path, doc_uri):
+    """
+    Performs amendment operation on given act, and updates file in MarkLogic database.
+    :param amendment_path: amendment file path
+    :param act_path: act file path
+    :param doc_uri: act uri
+    """
+    # amendment operations
+    amendment_file = open(amendment_path, 'rb')
+    amendment_data = amendment_file.read().decode("utf8")
+    amendment_content = io.StringIO(amendment_data)
+    amendment_dom = etree.parse(amendment_content)
+    operation = amendment_dom.xpath('/*/@operacija')[0]
+    target_article = amendment_dom.xpath('/*/@clanId')[0]
+    # act operations
+    act_file = open(act_path, 'rb')
+    act_data = act_file.read().decode("utf8")
+    act_content = io.StringIO(act_data)
+    act_dom = etree.parse(act_content)
+    # get all articles
+    articles = act_dom.xpath('//b:clan/@rbr', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})
+    # iterate through given articles
+    for article in articles:
+        if article == target_article:
+            if operation == 'Dodatak':
+                last_article = act_dom.xpath("//b:clan[@rbr='" + article + "']", namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
+                new_article = amendment_dom.xpath('//b:clan', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
+                last_article.append(new_article)
+
+            elif operation == 'Izmena':
+                amendment_text = amendment_dom.xpath('//b:clan/b:stav/tekst/blok', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
+                target_text = act_dom.xpath("//b:clan[@rbr='" + article + "']/b:stav/tekst/blok", namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
+                target_text.text = ""
+                target_text.text = amendment_text.text
+
+            elif operation == 'Brisanje':
+                delete_article = act_dom.xpath("//b:clan[@rbr='" + article + "']", namespaces={'b': 'http://ftn.uns.ac.rs/xml'})[0]
+                delete_article.getparent().remove(delete_article)
+
+    # fix article numbers
+    new_articles_num = act_dom.xpath('//b:clan', namespaces={'b': 'http://ftn.uns.ac.rs/xml'})
+    start = 1
+    for current_article in new_articles_num:
+        current_article.set('rbr', str(start))
+        start += 1
+    # return text
+    new_act = etree.tostring(act_dom, pretty_print=True)
+    new_act_string = new_act.decode("utf8")
+    update_document_from_string_uri(new_act_string, doc_uri)
+    print("Amendment acceptance successful!")
+
+
+def accept_amendment_uri(amendment_uri, act_uri):
+    """
+    Performs amentment operation on given act.
+    :param amendment_uri: amednment document uri
+    :param act_uri: act document uri
+    """
+    amendment = get_document_from_uri(amendment_uri)
+    act = get_document_from_uri(act_uri)
+    accept_amendment(amendment, act, act_uri)
+    utils.remove_existing_file(amendment)
+    utils.remove_existing_file(act)

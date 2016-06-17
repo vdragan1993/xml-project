@@ -1,10 +1,13 @@
 
 from django.shortcuts import render
 from rest_framework.parsers import JSONParser
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer
+from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf
+from .database import get_document_from_uri
+
 
 
 def index(request):
@@ -81,30 +84,59 @@ def akti(request):
         #return lista
         return JsonResponse(list, safe=False)
 
-
+@csrf_exempt
 def aktPdf(request):
-    '''
-    Ovako sam ja za IIS radila download pdf-a, ovo dole ['Content-Disposition'] je da ga ne otvara nego downloaduje
+    if request.method == 'POST':
+        uri_json = JSONParser().parse(request)
+        uri = uri_json['uri']
+        file_path = get_document_from_uri(uri)
+        name, collection, doc_type, status = uri_reader(uri)
+        tip = 'amendment'
+        if doc_type == 'akt':
+            tip = 'act'
+        pdf_file_path = transform_document_to_pdf(file_path, tip)
+        f = open(pdf_file_path, 'rb')
+        pdf = f.read()
+        f.close()
+        file_name = uri.split("/")[1]
+        response = HttpResponse(pdf, 'applicatiion/pdf')
+        response['Content-Disposition'] = 'attachment; filename='+file_name
+        return response
+    
 
-    template = get_template(template_src)
-    context = Context(context_dict)
-    html  = template.render(context)
-    file = open('test.pdf', "w+b")
-    pisaStatus = pisa.CreatePDF(html.encode('utf-8'), dest=file,encoding='utf-8')
-    file.seek(0)
-    pdf = file.read()
-    file.close()
-    response = HttpResponse(pdf, 'application/pdf')
-    response['Content-Disposition'] = 'attachment; filename=name.pdf'
-    return response'''
-
-
+@csrf_exempt
 def aktXml(request):
-    print("gadjaj uri i povuci xml")
+    if request.method == 'POST':
+        uri_json = JSONParser().parse(request)
+        uri = uri_json['uri']
+        file_path = get_document_from_uri(uri)
+        f = open(file_path, 'rb')
+        data = f.read()
+        f.close()
+        file_name = uri.split("/")[1]
+        response = HttpResponse(data, 'application/xml')
+        response['Content-Disposition'] = 'attachment; filenmame='+file_name
+        return response
 
 
+@csrf_exempt
 def aktHtml(request):
-    print("isto sr**e")
+    if request.method == 'POST':
+        uri_json = JSONParser().parse(request)
+        uri = uri_json['uri']
+        file_path = get_document_from_uri(uri)
+        name, collection, doc_type, status = uri_reader(uri)
+        tip = 'amendment'
+        if doc_type == 'akt':
+            tip = 'act'
+        html_file_path = transform_document_to_html(file_path, tip)
+        f = open(html_file_path, 'rb')
+        data = f.read()
+        f.close()
+        file_name = uri.split("/")[1]
+        response = HttpResponse(data, 'text/html')
+        response['Content-Disposition'] = 'attachment; filename='+file_name
+        return response
 
 
 @csrf_exempt
@@ -174,3 +206,16 @@ def create_amendment(request):
         list.append({'title': naslov, 'content': sadrzaj, 'act': akt})
         print(list)
         return JsonResponse(list, safe=False)
+
+
+@csrf_exempt
+def get_all(request):
+    f = open('api/data/content.txt', 'r')
+    lines = f.readlines()
+    f.close()
+    ret_val = []
+    for line in lines:
+        line = line[:-1]
+        name, collection, doc_type, status = uri_reader(line)
+        ret_val.append({'uri': line, 'name': name, 'type': doc_type, 'proces': status})
+    return JsonResponse(ret_val, safe=False)

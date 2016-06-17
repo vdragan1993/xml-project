@@ -12,8 +12,9 @@ urlpatterns = [
     url(r'^create_amendment/$', views.create_amendment, name='create_amendment'),
     url(r'^simple_search/$', views.simple_search, name='simple_search'),
     url(r'^akti/$', views.akti, name='akti'),  #pretraga, gadja je AllActsController
-    url(r'^(?P<uri>)/pdf/$', views.aktPdf, name='pdf'), #ako treba regex za ovo uri stavite
-    url(r'^(?P<uri>)/xml/$', views.aktXml, name='xml'),
-    url(r'^(?P<uri>)/html/$', views.aktHtml, name='html'),
+    url(r'^pdf/$', views.aktPdf, name='pdf'), #ako treba regex za ovo uri stavite
+    url(r'^xml/$', views.aktXml, name='xml'),
+    url(r'^html/$', views.aktHtml, name='html'),
+    url(r'^svi/$', views.get_all, name='svi')
 
 ]

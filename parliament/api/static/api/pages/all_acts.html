@@ -14,7 +14,7 @@
             <input type="text" class="form-control pull-left" style="width: 50%" ng-model="ssearch" >
             <button type="submit" class="button btn-primary btn-block btn-sm pull-left" style="width: 10%; height: 35px;"> Traži</button>
         </form>
-        <button type="button" ng-click="show=!show; noresults=false" class="button btn-success btn-block btn-sm pull-right" style="width: 20%; height: 35px;margin-right: 10%;"> Prikaži sve</button>
+        <button type="button" ng-click="prikaziSve(); noresults=false" class="button btn-success btn-block btn-sm pull-right" style="width: 20%; height: 35px;margin-right: 10%;"> Prikaži sve</button>
 <br><br>.
     </div>
 </div>
@@ -110,7 +110,7 @@
                     <td><button type="button" class="btn btn-danger center-block" ng-click="downloadPDF('pdf'+i.uri)">PDF</button></td>
                     <td><button type="button" class="btn btn-info center-block" ng-click="downloadPDF('html'+i.uri)"> HTML</button></td>
                     <td>
-                        <button type="button" class="btn btn-default center-block" ng-click="addAmandmen(i.uri)" ng-if="user.is_staff && i.proces!='Usvojen'"> Predloži amandman</button>
+                        <button type="button" class="btn btn-default center-block" ng-click="addAmandmen(i.uri)" ng-if="user.is_staff && i.proces!='usvojen' && i.type=='akt'"> Predloži amandman</button>
                         <p ng-if="user.is_superuser==false && user.is_staff==false">[[i.proces]]</p>
                     </td>
                 </tr>
