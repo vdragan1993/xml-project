@@ -1,27 +1,25 @@
-
 <div class="container wider">
-    <div class="page-header">
+    <div class="page-header text-center">
        <h2>Kreirajte novu sjednicu</h2>
-       <p>[[message]]</p>
+       <p style="color:darkgreen">[[message]]</p>
+       <p style="color:darkred">[[message2]]</p>
     </div>
 
-    <div class="row col-md-20 center-block">
         <form method="post" ng-submit="createConference()">
-              <table class="table table-bordered center-block" style="width:600px">
-                  <tbody>
+              <table class="table table-bordered center-block" style="max-width: 400px">
                   <tr>
                       <th>Za:</th>
-                      <td> <input type="number" min="0" name="za" ng-model="conference.for" required=""></td>
+                      <td> <input type="number" min="0" class="pull-left" style="max-width: 100px" name="za" ng-model="conference.for" required=""></td>
                   </tr>
 
                   <tr>
                       <th>Protiv:</th>
-                      <td> <input type="number" min="0" name="protiv" ng-model="conference.against" required=""></td>
+                      <td> <input type="number" min="0" class="pull-left" style="max-width: 100px" name="protiv" ng-model="conference.against" required=""></td>
                   </tr>
 
                   <tr>
                       <th>Uzdržano:</th>
-                      <td> <input type="number" min="0" name="uzdrzano" ng-model="conference.abstained" required=""></td>
+                      <td> <input type="number" min="0" class="pull-left" style="max-width: 100px" name="uzdrzano" ng-model="conference.abstained" required=""></td>
                   </tr>
 
                   <tr>
@@ -34,10 +32,9 @@
                   <tr>
                       <td colspan="2"> <button type="submit" class="button btn-lg btn-success center-block" style="width: 300px"> Kreiraj </button></td>
                   </tr>
-                  </tbody>
               </table>
         </form>
-    </div>
+
 
 
 </div>

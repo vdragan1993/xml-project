@@ -15,7 +15,7 @@
             $scope.createConference = function () {
                 $scope.message = "pozvana funkcija!";
                 console.log("pozvna funkcija!");
-                $location.path("/new_conference");
+                $location.path("/new_amendment");
 		        };
         });
 }(angular));

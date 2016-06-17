@@ -10,8 +10,9 @@
         'parliamentApp.AllConferencesCtrl',
         'parliamentApp.NewConferenceCtrl',
         'parliamentApp.AllActsCtrl',
-        'parliamentApp.NewAmendmentCtrl'
-
+        'parliamentApp.NewActCtrl',
+        'parliamentApp.NewAmendmentCtrl',
+        'parliamentApp.HistoryCtrl'
 
 
     ]);

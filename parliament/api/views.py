@@ -27,6 +27,7 @@ def users(request):
             response['user'] = None
             return JsonResponse(response)
 
+
 @csrf_exempt
 def akti(request):
     if request.method == 'POST':
@@ -92,8 +93,33 @@ def aktPdf(request):
     response['Content-Disposition'] = 'attachment; filename=name.pdf'
     return response'''
 
+
 def aktXml(request):
     print("gadjaj uri i povuci xml")
 
+
 def aktHtml(request):
     print("isto sr**e")
+
+
+@csrf_exempt
+def create_conference(request):
+    if request.method == 'POST':
+        print("pozvao view new conference")
+        data = JSONParser().parse(request)
+        data = data['conference']
+        print(data)
+        if 'for' in data:
+            za = data['for']
+        if 'against' in data:
+            protiv = data['against']
+        if 'abstained' in data:
+            uzdrzani = data['abstained']
+        if 'president' in data:
+            predsednik = data['president']
+        list = []
+        list.append({'president': predsednik, 'for': za, 'against': protiv, 'abstained': uzdrzani})
+        for i in list:
+            print(i)
+        #return lista
+        return JsonResponse(list, safe=False)

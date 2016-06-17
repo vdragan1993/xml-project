@@ -36,6 +36,7 @@
     <script type="text/javascript" src="{% static 'api/js/controllers/AllActsCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/NewActCtrl.js' %}"></script>
     <script type="text/javascript" src="{% static 'api/js/controllers/NewAmendmentCtrl.js' %}"></script>
+    <script type="text/javascript" src="{% static 'api/js/controllers/HistoryCtrl.js' %}"></script>
     <!-- Angular Services -->
     <script type="text/javascript" src=""></script>
     <!-- Other scripts -->
@@ -70,15 +71,16 @@
                   <li><a href="/new_act" >Novi akt</a></li>
                 </ul>
               </li>
-              <li><a href="" ng-if="user.is_staff"> Istorija</a></li>
                 <li class="dropdown" ng-if="user.is_superuser && user.is_staff">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sjednica <span class="caret"></span></a>
-                <ul class="dropdown-menu">
-                  <li><a href="/all_conferences">Pregled svih sjednica</a></li>
-                    <li role="separator" class="divider"></li>
-                  <li><a href="/new_conference">Nova sjednica</a></li>
-                </ul>
-              </li>
+                    <ul class="dropdown-menu">
+                        <li><a href="/all_conferences">Pregled svih sjednica</a></li>
+                        <li role="separator" class="divider"></li>
+                         <li><a href="/new_conference">Nova sjednica</a></li>
+                    </ul>
+                </li>
+              <li><a href="/history" ng-if="user.is_staff || user.is_superuser"> Istorija</a></li>
+
               <li ng-controller="LogoutCtrl"><a href="" title="Odjavi se" ng-click="logout()">Odjavi se</a></li>
             </ul>
           </div><!--/.nav-collapse -->

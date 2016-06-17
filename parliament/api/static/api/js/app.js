@@ -49,6 +49,10 @@
                 templateUrl: '/static/api/pages/new_amendment.html',
                 controller: 'NewAmendmentCtrl'
             })
+            .when('/history',{
+                templateUrl: '/static/api/pages/history.html',
+                controller: 'HistoryCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

@@ -1,0 +1,38 @@
+
+<div class="container wider">
+    <div class="page-header">
+       <h2>Istorija predloženih akata i amandmana za korisnika [[user.username]]</h2>
+    </div>
+    </div>
+
+
+
+<div class="container wider" style="background: #F5F5F5;">
+    <div class="cover-container" >
+        <table class="table table-bordered" style="max-width: 900px">
+            <thead>
+                <th>Rbr.</th>
+                <th>Naziv</th>
+                <th>Tip</th>
+                <th colspan="3"></th>
+                <th></th>
+            </thead>
+            <tbody>
+                <tr ng-repeat="i in imaginary">
+                    <td>[[$index +1]].</td>
+                    <td>[[i.name]]</td>
+                    <td>[[i.type]]</td>
+                    <td><button type="button" class="btn btn-warning center-block" ng-click="downloadPDF('xml'+i.uri)"> XML</button></td>
+                    <td><button type="button" class="btn btn-danger center-block" ng-click="downloadPDF('pdf'+i.uri)">PDF</button></td>
+                    <td><button type="button" class="btn btn-info center-block" ng-click="downloadPDF('html'+i.uri)"> HTML</button></td>
+                    <td>
+                        <button type="button" class="btn btn-default center-block" ng-click="discardAct(i.uri)" ng-if="i.proces!='Usvojen'"> Povuci</button>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
