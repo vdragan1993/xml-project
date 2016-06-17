@@ -26,7 +26,8 @@ body {
 .container {
   width: auto;
   max-width: 680px;
-  padding: 0 15px;
+  padding: 2%;
+    padding-top: 0%;
     display: block;
 }
 .container-jana-navbar{
@@ -37,4 +38,8 @@ body {
 .wider{
     max-width: 1000px;
     background: #F5F5F5;
+}
+
+.click:hover {
+    cursor: pointer;
 }

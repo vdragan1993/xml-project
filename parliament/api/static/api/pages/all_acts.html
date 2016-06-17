@@ -1,20 +1,86 @@
+
 <div class="container wider">
-    <div class="page-header">
-       <h2>Pretražite akte</h2>
+    <div class="page-header" style="float: left; width: 23%; border-right: 1px solid #d5d5d5; ">
+       <h2 ng-click = "trazi=true;napredna=false;show=false;" class="click">Pretražite akte</h2>
     </div>
-
+    <div class="page-header" style="float: left; width: 77%;padding-left: 10px;">
+       <h2 class="click" ng-click = "trazi=false;napredna=true;show=false;">Napredna pretraga</h2>
+    </div>
+    </div>
+<div class="container wider" ng-show="trazi">
     <div class="cover-container" >
-        <form ng-submit="sSearch()">
-            <input type="text" class="form-control pull-left" style="width: 67%" ng-model="ssearch.text" >
-            <button type="submit" class="button btn-primary btn-block btn-sm pull-right" style="width: 30%; height: 35px"> Traži</button>
-        </form>
-        <br><br>
-            <button type="button" class="button btn-success btn-block btn-sm pull-right" style="width: 30%; height: 35px"> Napredna pretraga...</button>
-    </div>
-<br><br><br>
-</div>
-<br><br><br>
 
+        <form ng-submit="sSearch()">
+            <input type="text" class="form-control pull-left" style="width: 50%" ng-model="ssearch.text" >
+            <button type="submit" class="button btn-primary btn-block btn-sm pull-left" style="width: 10%; height: 35px;"> Traži</button>
+        </form>
+        <button type="button" ng-click="show=true;" class="button btn-success btn-block btn-sm pull-right" style="width: 20%; height: 35px;margin-right: 10%;"> Prikaži sve</button>
+<br><br>.
+    </div>
+</div>
+<div class="container wider" ng-show="napredna">
+    <div class="cover-container" >
+
+        <form ng-submit="sNapredna()">
+            <table width="100%">
+                <tr>
+                    <td>Naslov</td>
+                    <td><input type="text" class="form-control" style="width: 200px;" ng-model="akt.naslov" ></td>
+                    <td>Datum usvajanja</td>
+                    <td><input type="date" class="form-control" style="width:200px" ng-model="akt.dat_usvajanja" ></td>
+                </tr>
+                <tr>
+                    <td>Predlagač</td>
+                    <td><input type="text" class="form-control" style="width:200px" ng-model="akt.predlagac" ></td>
+                    <td>Datum početka važenja</td>
+                    <td><input type="date" class="form-control" style="width:200px" ng-model="akt.pocetak" ></td>
+                </tr>
+                <tr>
+                    <td>Datum kreiranja</td>
+                    <td><input type="date" class="form-control" style="width: 200px;" ng-model="akt.dat_kreiranja" ></td>
+                    <td>Datum prestanka važenja</td>
+                    <td><input type="date" class="form-control" style="width:200px"  ng-model="akt.prestanak" ></td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>
+                        <select class="form-control" style="width:200px" ng-model="akt.status">
+                            <option>Usvojen</option>
+                            <option>U proceduri</option>
+                        </select>
+                    </td>
+                    <td>Glasovi za</td>
+                    <td align="center" style="width: 200px;"><input type="number" class="form-control" style="width:90px;float:left;" ng-model="akt.za_od"> - <input type="number" class = "form-control" style="width: 90px;float:right;"  ng-model="akt.za_do"></td>
+
+                </tr>
+                <tr>
+                    <td>Broj službenog glasnika</td>
+                    <td><input type="number" class="form-control" style="width: 200px;" ng-model="akt.glasnik" ></td>
+                    <td>Glasovi protiv</td>
+                    <td align="center" style="width: 200px;"><input type="number" class="form-control" style="width: 90px;float:left;" ng-model="akt.protiv_od"> - <input type="number" class="form-control" style="width: 90px;float:right;" ng-model="akt.protiv_do"></td>
+                </tr>
+                <tr>
+                    <td>Kategorija</td>
+                    <td>
+                        <select class="form-control" style="width:200px"  ng-model="akt.kategorija" >
+                            <option>Poslovnik</option>
+                            <option>Odluka</option>
+                            <option>Pravilnik</option>
+                            <option>Rješenje</option>
+                            <option>Ostalo</option>
+                        </select>
+                    </td>
+                    <td>Uzdržani</td>
+                    <td align="center" style="width: 200px;"><input type="number" class="form-control" style="width: 90px;float:left;" ng-model="akt.uzdrzani_od"> - <input type="number" class="form-control" style="width: 90px;float:right;" ng-model="akt.uzdrzani_do"></td>
+                </tr>
+            </table>
+<br>
+            <input ng-click="show=true;" type="submit" class="button btn-primary btn-block btn-sm pull-left" style="width: 10%; height: 35px;" value = "Pretraži" >
+        </form>
+<br><br>
+    </div>
+</div>
+<br>
 <div class="container wider" style="background: #F5F5F5;" ng-show="show">
     <div class="page-header">
        <h2>Rezultati pretrage:</h2>
@@ -33,9 +99,9 @@
                     <td>[[$index +1]].</td>
                     <td>[[i.name]]</td>
                     <td>[[i.type]]</td>
-                    <td><button type="button" class="btn btn-warning center-block"> XML</button></td>
-                    <td><button type="button" class="btn btn-danger center-block">PDF</button></td>
-                    <td><button type="button" class="btn btn-info center-block"> HTML</button></td>
+                    <td><button type="button" class="btn btn-warning center-block" ng-click="downloadPDF('xml'+i.uri)"> XML</button></td>
+                    <td><button type="button" class="btn btn-danger center-block" ng-click="downloadPDF('pdf'+i.uri)">PDF</button></td>
+                    <td><button type="button" class="btn btn-info center-block" ng-click="downloadPDF('html'+i.uri)"> HTML</button></td>
                     <td>
                         <button type="button" class="btn btn-default center-block" ng-click="addAmandmen(i.uri)" ng-if="user.is_superuser==false && user.is_staff && i.proces=='Usvojen'"> Predloži amandman</button>
                         <p ng-if="user.is_superuser==false && user.is_staff==false">[[i.proces]]</p>
@@ -44,7 +110,6 @@
             </tbody>
         </table>
     </div>
-<br><br>
 </div>
 
 
