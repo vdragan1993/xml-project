@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer
 from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf
-from .database import get_document_from_uri
+from .database import get_document_from_uri, text_search, advanced_search_list
 
 
 
@@ -22,7 +22,7 @@ def users(request):
         password = data['user']['password']
         user = authenticate(username=username, password=password)
         if user is not None:
-            login(request, user)
+            #login(request, user)
             serializer = UserSerializer(user)
             response['user'] = serializer.data
             return JsonResponse(response)
@@ -36,53 +36,34 @@ def akti(request):
     if request.method == 'POST':
         data = JSONParser().parse(request)
         data = data['akt']
-        #prazna polja se ne salju uopste, osim datuma, oni su None ako nisu uneseni
-        #prolazak za svako polje da se vidi je li tu
-        if 'naslov' in data: naslov = data['naslov']
-        else: naslov= None
+        keys = []
+        values = []
 
-        if 'predlagac' in data: predlagac = data['predlagac']
-        else: predlagac= None
-
-        if 'status' in data: status= data['status']
-        else: status= None
-
-        if 'kategorija' in data: kategorija = data['kategorija']
-        else: kategorija= None
-
-        if 'za_od' in data: za_od = data['za_od']
-        else: za_od= None
-
-        if 'za_do' in data: za_do = data['za_do']
-        else: za_do= None
-
-        if 'protiv_od' in data: protiv_od = data['protiv_od']
-        else: protiv_od= None
-
-        if 'protiv_do' in data: protiv_do = data['protiv_do']
-        else: protiv_do= None
-
-        if 'uzdrzani_od' in data: uzdrzani_od = data['uzdrzani_od']
-        else: uzdrzani_od= None
-
-        if 'uzdrzani_do' in data: uzdrzani_do = data['uzdrzani_do']
-        else: uzdrzani_do= None
-
-        if 'glasnik' in data: glasnik = data['glasnik']
-        else: glasnik= None
+        for a in data:
+            if data[a] and a!='operator':
+                keys.append(a)
+                if a.startswith('datum'):
+                    values.append(data[a].split("T")[0])
+                else:
+                    values.append(data[a])
 
         if 'operator' in data:
-            op = data['operator']
+            operator = data['operator']
         else:
-            op = None
+            operator = 'AND'
 
-        #pretrazi akte na osnovu parametara
-        #serijalizuj ih i smjeti u listu
-        list = []
-        list.append({'uri': 'uri', 'name': 'Naslov 1', 'type': "Akt", 'proces': "Usvojen"})
-        list.append({'uri': predlagac, 'name':naslov, 'type': kategorija, 'proces':status})
-        #return lista
-        return JsonResponse(list, safe=False)
+        result_uris = advanced_search_list(keys, values, operator)
+        ret_val = []
+        if len(result_uris) == 0:
+            ret_val.append({'message': 'Nema rezultata'})
+        else:
+            for uri in result_uris:
+                name, collection, doc_type, status = uri_reader(uri)
+                ret_val.append({'uri': uri, 'name': name, 'type': doc_type, 'proces': status})
+
+        return JsonResponse(ret_val, safe=False)
+
+
 
 @csrf_exempt
 def aktPdf(request):
@@ -102,7 +83,7 @@ def aktPdf(request):
         response = HttpResponse(pdf, 'applicatiion/pdf')
         response['Content-Disposition'] = 'attachment; filename='+file_name
         return response
-    
+
 
 @csrf_exempt
 def aktXml(request):
@@ -167,11 +148,18 @@ def create_conference(request):
 @csrf_exempt
 def simple_search(request):
     if request.method == 'POST':
-        print("pozvao view simple search")
         data = JSONParser().parse(request)
         data = data['ssearch']
-        print(data)
-        return JsonResponse(data, safe=False)
+        result_uris = text_search(data)
+        ret_val = []
+        if len(result_uris) == 0:
+            ret_val.append({'message': 'Nema rezultata'})
+        else:
+            for uri in result_uris:
+                name, collection, doc_type, status = uri_reader(uri)
+                ret_val.append({'uri': uri, 'name': name, 'type': doc_type, 'proces': status})
+
+        return JsonResponse(ret_val, safe=False)
 
 
 @csrf_exempt

@@ -30,7 +30,14 @@
                         url: '/api/simple_search/',
                         data: { 'ssearch' : $scope.ssearch }
                     }).then(function success(response) {
-                        console.log("poslala sam parametar pretrage");
+                       if (response.data[0].message == 'Nema rezultata')
+                       {
+                            console.log(response.data[0].message);
+                       }
+                       else {
+                           $scope.imaginary = response.data;
+                           $scope.show = true;
+                       }
                 });
 
                }
@@ -87,8 +94,14 @@
                         url: '/api/akti/',
                         data: { 'akt' : $scope.akt }
                     }).then(function success(response) {
-                    $scope.show=true;
-                    $scope.imaginary = response.data;
+                   if (response.data[0].message == 'Nema rezultata')
+                       {
+                            console.log(response.data[0].message);
+                       }
+                       else {
+                           $scope.imaginary = response.data;
+                           $scope.show = true;
+                       }
                 });
 		   };
 

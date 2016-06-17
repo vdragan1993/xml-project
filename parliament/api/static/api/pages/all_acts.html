@@ -27,37 +27,37 @@
                     <td>Naslov</td>
                     <td><input type="text" class="form-control" style="width: 200px;" ng-model="akt.naslov" ></td>
                     <td>Datum usvajanja</td>
-                    <td><input type="date" class="form-control" style="width:200px" ng-model="akt.dat_usvajanja" ></td>
+                    <td><input type="date" class="form-control" style="width:200px" ng-model="akt.datum_usvajanja" ></td>
                 </tr>
                 <tr>
                     <td>Predlagač</td>
                     <td><input type="text" class="form-control" style="width:200px" ng-model="akt.predlagac" ></td>
                     <td>Datum početka važenja</td>
-                    <td><input type="date" class="form-control" style="width:200px" ng-model="akt.pocetak" ></td>
+                    <td><input type="date" class="form-control" style="width:200px" ng-model="akt.datum_pocetka_vazenja" ></td>
                 </tr>
                 <tr>
                     <td>Datum kreiranja</td>
-                    <td><input type="date" class="form-control" style="width: 200px;" ng-model="akt.dat_kreiranja" ></td>
+                    <td><input type="date" class="form-control" style="width: 200px;" ng-model="akt.datum_kreiranja" ></td>
                     <td>Datum prestanka važenja</td>
-                    <td><input type="date" class="form-control" style="width:200px"  ng-model="akt.prestanak" ></td>
+                    <td><input type="date" class="form-control" style="width:200px"  ng-model="akt.datum_prestanka_vazenja" ></td>
                 </tr>
                 <tr>
                     <td>Status</td>
                     <td>
                         <select class="form-control" style="width:200px" ng-model="akt.status">
-                            <option>Usvojen</option>
-                            <option>U proceduri</option>
+                            <option>usvojen</option>
+                            <option>u proceduri</option>
                         </select>
                     </td>
                     <td>Glasovi za</td>
-                    <td align="center" style="width: 200px;"><input type="number" class="form-control" style="width:90px;float:left;" ng-model="akt.za_od"> - <input type="number" class = "form-control" style="width: 90px;float:right;"  ng-model="akt.za_do"></td>
+                    <td><input type="number" class="form-control" style="width:200px;" ng-model="akt.za"></td>
 
                 </tr>
                 <tr>
                     <td>Broj službenog glasnika</td>
-                    <td><input type="number" class="form-control" style="width: 200px;" ng-model="akt.glasnik" ></td>
+                    <td><input type="text" class="form-control" style="width: 200px;" ng-model="akt.br_sluzbenog_glasnika" ></td>
                     <td>Glasovi protiv</td>
-                    <td align="center" style="width: 200px;"><input type="number" class="form-control" style="width: 90px;float:left;" ng-model="akt.protiv_od"> - <input type="number" class="form-control" style="width: 90px;float:right;" ng-model="akt.protiv_do"></td>
+                    <td><input type="number" class="form-control" style="width: 200px;" ng-model="akt.protiv"></td>
                 </tr>
                 <tr>
                     <td>Kategorija</td>
@@ -66,12 +66,12 @@
                             <option>Poslovnik</option>
                             <option>Odluka</option>
                             <option>Pravilnik</option>
-                            <option>Rješenje</option>
+                            <option>Rešenje</option>
                             <option>Ostalo</option>
                         </select>
                     </td>
                     <td>Uzdržani</td>
-                    <td align="center" style="width: 200px;"><input type="number" class="form-control" style="width: 90px;float:left;" ng-model="akt.uzdrzani_od"> - <input type="number" class="form-control" style="width: 90px;float:right;" ng-model="akt.uzdrzani_do"></td>
+                    <td><input type="number" class="form-control" style="width: 200px;" ng-model="akt.uzdrzani"></td>
                 </tr>
             </table>
                 <br>
