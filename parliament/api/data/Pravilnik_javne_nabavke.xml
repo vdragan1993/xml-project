@@ -2,7 +2,7 @@
 <proj:akt xmlns:proj="http://ftn.uns.ac.rs/xml"
  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:schemaLocation="http://ftn.uns.ac.rs/xml file:/D:/Fakultet/4.godina/XWS/XML/XML_Proj_schema_act.xsd" naslov="Pravilnik o bližem uređivanju postupka javne nabavke za Skupštinu Grada Novog Sada, Gradsku izbornu komisiju i Službu Skupštine Grada Novog Sada" drzava="Srbija" opstina="Novi Sad" grad="Novi Sad" ustanova_organ="Skupština Grada Novog Sada" datum_kreiranja="2012-05-04"
-     datum_usvajanja="2012-06-05" predlagac="Petar Petrović" status="usvojen" kategorija="pravilnik" za="45"
+     datum_usvajanja="2012-06-05" predlagac="Marko Marković" status="usvojen" kategorija="Pravilnik" za="45"
      protiv="15" uzdrzani="5" br_sluzbenog_glasnika="124/12" datum_pocetka_vazenja="2006-08-07"
      datum_prestanka_vazenja="2020-05-05">
     <preambula>
@@ -101,7 +101,7 @@
             </proj:clan>
         </proj:glava>
         <proj:glava naslov="Način planiranja nabavki">
-            <proj:clan rbr="5">
+            <proj:clan rbr="4">
                 <proj:stav>
                     <tekst>
                         <blok>
@@ -112,7 +112,7 @@
                     </tekst>
                 </proj:stav>
             </proj:clan>
-            <proj:clan rbr="6">
+            <proj:clan rbr="5">
                 <proj:stav>
                     <tekst>
                         <blok>

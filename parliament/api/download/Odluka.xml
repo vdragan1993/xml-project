@@ -1,8 +1,5 @@
 <?xml version="1.0"?>
-<proj:akt xmlns:proj="http://ftn.uns.ac.rs/xml"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://ftn.uns.ac.rs/xml file:/D:/Fakultet/4.godina/XWS/XML/XML_Proj_schema_act.xsd" naslov="Odluka o određivanju zona na teritoriji Grada Novog Sada sa koeficijentima za nepokretnosti u zonama za potrebe utvrđivanja poreza na imovinu" drzava="Srbija" opstina="Novi Sad" grad="Novi Sad" ustanova_organ="Skupština Grada Novog Sada" datum_kreiranja="2013-10-23"
-      predlagac="marko" status="u proceduri" kategorija="Odluka" >
+<proj:akt xsi:schemaLocation="http://ftn.uns.ac.rs/xml file:/D:/Fakultet/4.godina/XWS/XML/XML_Proj_schema_act.xsd" naslov="Odluka o određivanju zona na teritoriji Grada Novog Sada sa koeficijentima za nepokretnosti u zonama za potrebe utvrđivanja poreza na imovinu" drzava="Srbija" opstina="Novi Sad" grad="Novi Sad" ustanova_organ="Skupština Grada Novog Sada" datum_kreiranja="2013-10-23" predlagac="marko" status="u proceduri" kategorija="Odluka" xmlns:proj="http://ftn.uns.ac.rs/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <preambula>
         <blok>
             Na osnovu člana 6. stav 3, 4, 5, 6. i 7a. Zakona o porezima na imovinu („ Službeni
@@ -26,12 +23,10 @@
             <proj:clan rbr="2">
                 <proj:stav>
                     <tekst>
-                        <blok>
-                            U zavisnosti od komunalne opremljenosti
-                            i saobraćajne povezanosti sa centralnim delovima jedinice lokalne samouprave, 
-                            odnosno radnim zonama, određuju se tri zone na 
-                            teritoriji Grada Novog Sada.
-                        </blok>
+                        <blok>U zavisnosti od komunalne opremljenosti, opremljenosti javnim objektima i
+                    saobraćajne povezanosti sa centralnim delovima jedinice lokalne samouprave, odnosno
+                    radnim zonama i drugim sadržajima u naselju, određuje se pet zona na teritoriji Grada
+                    Novog Sada.</blok>
                     </tekst>
                 </proj:stav>
             </proj:clan>

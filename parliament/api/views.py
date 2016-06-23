@@ -5,7 +5,7 @@ from django.http import JsonResponse, HttpResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth import authenticate, login, logout
 from .serializers import UserSerializer
-from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf, validate_document, read_metadata, set_metadata, get_proponent_for_user, insert_proponent, delete_proponent, get_all_proponents, read_metadata_from_file, extract_parent_act, set_metadata_to_file, write_conference
+from .utils import uri_reader, transform_document_to_html, transform_document_to_pdf, validate_document, read_metadata, set_metadata, get_proponent_for_user, insert_proponent, delete_proponent, get_all_proponents, read_metadata_from_file, extract_parent_act, set_metadata_to_file, write_conference, remove_existing_file
 from .database import get_document_from_uri, text_search, advanced_search_list, insert_document_from_string, delete_document_from_uri, accept_amendment_uri, insert_document_from_file
 import time
 
@@ -153,12 +153,17 @@ def create_conference(request):
             amandman_path = get_document_from_uri(amandman)
             amandman_uri = read_metadata_from_file(amandman_path, 'uri')
             parent_act = extract_parent_act(amandman_uri)
+            remove_existing_file(amandman_path)
             # usvajam amandman
             accept_amendment_uri(amandman, parent_act)
-            # brisem ga
+            # zamjenim kolekciju i brisem
+            amandman_path = get_document_from_uri(amandman)
             insert_document_from_file(amandman_path, 'usvojeniamandmani')
             delete_proponent(amandman)
             delete_document_from_uri(amandman)
+            remove_existing_file(amandman_path)
+
+
 
         # usvajam akte
         for akt in akti:
@@ -167,6 +172,7 @@ def create_conference(request):
             insert_document_from_file(akt_path, 'usvojeniakti')
             delete_proponent(akt)
             delete_document_from_uri(akt)
+            remove_existing_file(akt_path)
 
         #print(len(usvojeni))
         #string_to_write = predsednik+","+datum_sednice+","+za+","+protiv+","+uzdrzani+","+len(usvojeni)+"\n"
@@ -213,8 +219,9 @@ def create_act(request):
             sadrzaj = data['content'].encode('utf-8')
 
 
-        predlagac_akta = 'dragan'
-        #predlagac_akta = read_metadata(sadrzaj.decode('utf-8'), 'predlagac')
+        #predlagac_akta = 'dragan'
+
+        predlagac_akta = read_metadata(data['content'], 'predlagac')
         #sadrzaj = sadrzaj.decode('utf-8')
 
         if validate_document(sadrzaj, 'act'):

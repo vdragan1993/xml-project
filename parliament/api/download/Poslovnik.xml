@@ -1,12 +1,5 @@
 <?xml version="1.0"?>
-<proj:akt xmlns:proj="http://ftn.uns.ac.rs/xml"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://ftn.uns.ac.rs/xml file:/C:/Users/MarkoIvetic/Desktop/xml/XML_Proj_schema_act.xsd" 
- naslov="POSLOVNIK SKUPŠTINE GRADA NOVOG SADA" drzava="Srbija" 
- opstina="Novi Sad" grad="Novi Sad" ustanova_organ="Skupština grada Novog Sada" datum_kreiranja="2006-05-04"
-     datum_usvajanja="2006-05-04" predlagac="Petar Petrovic" status="usvojen" kategorija="Poslovnik" za="50"
-     protiv="10" uzdrzani="5" br_sluzbenog_glasnika="12/2010" datum_pocetka_vazenja="2006-05-04"
-     datum_prestanka_vazenja="2006-05-04">
+<proj:akt xsi:schemaLocation="http://ftn.uns.ac.rs/xml file:/C:/Users/MarkoIvetic/Desktop/xml/XML_Proj_schema_act.xsd" naslov="POSLOVNIK SKUPŠTINE GRADA NOVOG SADA" drzava="Srbija" opstina="Novi Sad" grad="Novi Sad" ustanova_organ="Skupština grada Novog Sada" datum_kreiranja="2006-05-04" datum_usvajanja="2006-05-04" predlagac="Petar Petrovic" status="usvojen" kategorija="Poslovnik" za="50" protiv="10" uzdrzani="5" br_sluzbenog_glasnika="12/2010" datum_pocetka_vazenja="2006-05-04" datum_prestanka_vazenja="2006-05-04" xmlns:proj="http://ftn.uns.ac.rs/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <preambula>
         <blok>Na osnovu člana 24. tačka 1. Statuta Grada Novog Sada - prečišćen tekst 
             (“Službeni list Grada Novog Sada”, broj 43/2008), Skupština Grada Novog Sada na XXIV sednici 

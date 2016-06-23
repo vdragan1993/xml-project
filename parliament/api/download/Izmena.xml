@@ -1,10 +1,5 @@
 <?xml version="1.0"?>
-<projAm:amandman xmlns:proj="http://ftn.uns.ac.rs/xml"
-    xmlns:projAm="https://ftn.uns.ac.rs/xml"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="https://ftn.uns.ac.rs/xml file:/C:/Users/MarkoIvetic/Desktop/xml/XML_Proj_schema_amandman.xsd" 
-    datum="2006-05-04" uri="file:/C:/Users/MarkoIvetic/Desktop/xml/Odluka.xml" clanId="2" 
-    operacija="Izmena" predlagac="dragan">
+<projAm:amandman xsi:schemaLocation="https://ftn.uns.ac.rs/xml file:/C:/Users/MarkoIvetic/Desktop/xml/XML_Proj_schema_amandman.xsd" datum="2006-05-04" uri="http://147.91.177.194:8000/v1/documents?uri=/procesakti/Odluka.xml&amp;database=Tim20" clanId="2" operacija="Izmena" predlagac="dragan" xmlns:proj="http://ftn.uns.ac.rs/xml" xmlns:projAm="https://ftn.uns.ac.rs/xml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <projAm:opis>Izmena za odluku</projAm:opis>
     <proj:clan rbr="2" naslov="">
         <proj:stav>
