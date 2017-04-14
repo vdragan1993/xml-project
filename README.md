@@ -14,24 +14,24 @@ Programski jezik: <b>Python 3.4.0 </b>
 <br />
 Uputstvo za pokretanje:
 <ol>
-<li>Instalirati neophodne biblioteke komandom:
-```
-pip install -r requirements.txt
-```
+<li>Instalirati neophodne biblioteke komandom:  
+<b>
+pip install -r requirements.txt  
+</b>
 </li>
-<li>Premjestiti se u folder <i>parliament</i>:
-```
-cd parliament
-```
+<li>Premjestiti se u folder <i>parliament</i>:  
+<b>
+cd parliament  
+</b>
 </li>
 <li>Pokrenuti aplikaciju:
-```
+<b>
 python manage.py runserver
-```
+</b>
 </li>
 <li>
 Aplikacija je dostupna na: 
-```
+<b>
 http://localhost:8000/
-```
+</b>
 </li>
